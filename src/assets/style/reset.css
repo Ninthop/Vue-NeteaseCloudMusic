@@ -1,10 +1,11 @@
-html, body, em{
+html, body{
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font: inherit;
 	font-size: 62.5%;
 	vertical-align: baseline;
+	user-select: none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
