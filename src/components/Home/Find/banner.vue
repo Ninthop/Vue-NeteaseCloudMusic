@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper">
-		<swiper :options="swiperOption">
+		<swiper :options="swiperOption" v-if="bannerList.length > 1">
 			<swiper-slide v-for="item of bannerList" :key="item.bannerId">
 				<img :src="item.pic" alt="轮播图" class="banner-image">
 			</swiper-slide>
@@ -19,7 +19,12 @@ export default {
 	data() {
       return {
         swiperOption: {
-         
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			},
+			loop: true,
+			autoplay: true
         }
       }
 	}
@@ -27,9 +32,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+	.wrapper >>> .swiper-pagination-bullet-active
+		background red
+		outline none
+	.wrapper >>> .swiper-pagination-bullet
+		transition 0.3s
 	.wrapper
-		// height 0
-		// padding-bottom 12rem
 		width 100%
 		overflow hidden
 		.swiper-slide
@@ -40,7 +48,7 @@ export default {
 				margin-top 1rem
 			.banner-image
 				width 70%
-				box-shadow 1rem -1rem .1rem rgba(255, 107, 129,1.0)
+				box-shadow 1rem -1rem rgba(255, 107, 129,1.0)
 				@media all and (max-width 768px)
 					width 90%
 					border-radius .8rem

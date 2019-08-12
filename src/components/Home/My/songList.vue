@@ -1,0 +1,56 @@
+<template>
+	<div class="my-song">
+		<div class="my-song-title">创建的歌单</div>
+		<div v-for="item of songList" :key="item.id">
+			<div v-show="item.userId == uid" class="song-list" >
+				<img :src="item.coverImgUrl" alt="歌单封面" class="cover-img">
+				<span class="list-title">
+					<div>{{ item.name }}</div>
+					<div class="song-num">{{ item.trackCount }}首</div>
+				</span>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+export default {
+	name: 'MySonglist',
+	props: {
+		songList: Array
+	},
+	data () {
+		return {
+			uid: this.$store.state.uid
+		}
+	}
+}
+</script>
+
+<style lang="stylus" scoped>
+	@import ('~_s/varibles.styl')
+	.my-song
+		background-color white
+		.my-song-title
+			font-size $font-size-medium
+			padding 1rem 1rem 0 1rem
+			font-weight bold
+		.song-list
+			font-size $font-size-normal
+			display flex
+			margin 1rem
+			.cover-img
+				border-radius .2rem
+				width 4rem
+				height 4rem
+			.list-title
+				display flex
+				flex-direction column
+				justify-content center
+				margin-left .5rem
+				font-size $font-size-normal
+				.song-num
+					color gray
+					font-size $font-size-small
+					margin-top .4rem
+</style>

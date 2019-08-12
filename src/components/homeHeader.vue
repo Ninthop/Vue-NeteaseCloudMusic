@@ -1,17 +1,11 @@
 <template>
 	<div class="header">
-		<span class="user-info">
+		<router-link to="/user" tag="span" class="user-info">
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-geshou"></use>
 			</svg>
-		</span>
-		<span class="tab">
-			<ul>
-				<li><router-link to='/my' tag='span' class="tab-item">我的</router-link></li>
-				<li><router-link to='/find' tag='span' class="tab-item">发现</router-link></li>
-				<li><router-link to='/chart' tag='span' class="tab-item">排行榜</router-link></li>
-			</ul>
-		</span>
+		</router-link>
+		<home-tab />
 		<span class="search">
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-SanMiAppiconfill-copy"></use>
@@ -21,8 +15,13 @@
 </template>
 
 <script>
+import HomeTab from './homeTab'
+
 export default {
-	name: 'HomeHeader'
+	name: 'HomeHeader',
+	components: {
+		HomeTab
+	}
 }
 </script>
 
@@ -35,31 +34,6 @@ export default {
 		padding .3rem 0
 		.user-info
 			margin .5rem
-		.tab
-			display flex
-			flex 1
-			ul
-				display flex
-				flex-direction row
-				width 100%
-				padding 0 2rem
-				@media all and (max-width 768px)
-					justify-content space-around
-				li
-					list-style none
-					margin 0 1rem
-					padding-top .5rem
-					.tab-item
-						text-align center
-						list-style none
-						font-size $font-size-medium
-						transition 0.3s
-						&.router-link-active
-							display inline-block
-							margin-top -.5rem
-							font-size $font-size-large
-							font-weight bold
-							text-shadow .2rem .2rem 0rem $color-theme
 		.search
 			margin .5rem
 </style>

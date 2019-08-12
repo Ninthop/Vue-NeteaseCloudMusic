@@ -9,6 +9,7 @@ export default[
 	  children: [
 		{
 			path: 'my',
+			meta: {logined: true},
 			component: () => import('../components/Home/homeMy')
 		},
 		{
@@ -20,6 +21,16 @@ export default[
 			component: () => import('../components/Home/homeChart')
 		}
 	  ]
+	},
+	{
+		path: '/login',
+		name: 'login',
+		component: () => import('../views/Login.vue')
+	},
+	{
+		path: '/user',
+		name: 'user',
+		component: () => import('../views/User.vue')
 	},
 	{
 		path: '/test',

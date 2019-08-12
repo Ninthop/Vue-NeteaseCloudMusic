@@ -23,3 +23,16 @@ new Vue({
   VueAwesomeSwiper,
   render: h => h(App)
 }).$mount('#app')
+
+router.beforeEach ((to, from, next) => {
+	if (to.meta.logined) {
+		if (Boolean(store.state.loginType)) {
+			next ()
+		}else {
+			next({
+				path: '/login'
+			})
+		}
+	}
+	next ()
+})

@@ -8,6 +8,23 @@ const getBanner = data => {
 	})
 }
 
+const getRecList = data => {
+	return request({
+		url: '/personalized',
+		methods: 'get',
+		params: data
+	})
+}
+
+const getAlbum = data => {
+	return request({
+		url: '/album/newest',
+		methods: 'get',
+		params: data
+	})
+}
 export {
-	getBanner
+	getBanner,
+	getRecList,
+	getAlbum
 }
