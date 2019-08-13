@@ -25,8 +25,10 @@ new Vue({
 }).$mount('#app')
 
 router.beforeEach ((to, from, next) => {
+	// console.log(store.state.loginType)
 	if (to.meta.logined) {
-		if (Boolean(store.state.loginType)) {
+		if (store.state.loginType == 1) {
+			// console.log(store.state.loginType)
 			next ()
 		}else {
 			next({
@@ -36,3 +38,11 @@ router.beforeEach ((to, from, next) => {
 	}
 	next ()
 })
+
+
+Vue.filter('formatPic',
+  function(url) {
+	if (!url) return ''
+	return `${url}?param=200y200`
+  }
+)

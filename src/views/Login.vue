@@ -10,7 +10,7 @@
 		<div>
 			<span class="login-text">请输入密码：</span><input type="password" class="pwd" v-model="loginForm.password">
 		</div>
-		<button class="confirm" type="submit" @click="login">登陆</button>
+		<button class="confirm" @click="login">登陆</button>
 	</div>
 </template>
 
@@ -37,11 +37,15 @@ export default {
         		alert('账号或密码不能为空');
 			}else {
 				axios.get('http://localhost:3000/login/cellphone',{
-					params: this.loginForm
+					params: this.loginForm,
+					withCredentials: true
 				})
 				.then(res => {
-					this.$store.commit('Login', res.data.loginType)
+					// console.log(res.response)
+					console.log(res)
+					this.$store.commit('changeLoginStatus', res.data.loginType)
 					this.$store.commit('changeUid', res.data.account.id)
+					this.$store.dispatch('changeUserInfo')
 					this.$router.replace('/')
 				})
 				.catch(
@@ -51,6 +55,8 @@ export default {
 							alert('账号与密码错误')
 						}else if (error.code === 502) {
 							alert(error.msg)
+						}else if (error.code === 401) {
+							alert('登陆失效，请重新登陆')
 						}else {
 							alert('连接失败')
 						}

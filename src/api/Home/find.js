@@ -23,8 +23,26 @@ const getAlbum = data => {
 		params: data
 	})
 }
+
+const getLoginRec = data => {
+	return request({
+		url: '/recommend/resource',
+		methods: 'get',
+		params: data
+	})
+}
+
+const refreshLogin = () => {
+	return request({
+		url: '/login/refresh',
+		methods: 'get'
+	})
+}
+
 export {
 	getBanner,
 	getRecList,
-	getAlbum
+	getAlbum,
+	getLoginRec,
+	refreshLogin
 }

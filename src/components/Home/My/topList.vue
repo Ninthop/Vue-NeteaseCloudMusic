@@ -10,7 +10,7 @@
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-huanyuangequxinxi"></use>
 			</svg>
-			<span class="recent-title">我的收藏<span class="number">(0)</span></span>
+			<span class="recent-title">我的收藏<span class="number">({{ userSubcount.artistCount }})</span></span>
 		</div>
 	</div>
 </template>
@@ -18,7 +18,10 @@
 <script>
 
 export default {
-	name: 'MyTop'
+	name: 'MyTop',
+	props: {
+		userSubcount: Object
+	}
 }
 </script>
 

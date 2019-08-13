@@ -7,7 +7,7 @@
 
 		<div class="content">
 			<span class="item" v-for="item of albumList.slice(0, 3)" :key="item.id">
-				<img :src="item.picUrl" alt="歌单封面">
+				<img :src="item.picUrl | formatPic" alt="歌单封面">
 				<div class="item-title">{{ item.name }}</div>
 				<div class="author">{{ item.artist.name }}</div>
 			</span>
@@ -66,14 +66,16 @@ export default {
 					border-radius .4rem
 				.item-title
 					line-height 1.4rem
-					margin-top .2rem
+					margin-top .5rem
 					letter-spacing .02rem
 					overflow hidden
 					text-overflow ellipsis
 					display -webkit-box
 					-webkit-line-clamp 2
 					-webkit-box-orient vertical
+					font-size $font-size-normal
 				.author
+					font-size $font-size-small
 					line-height 1.4rem
 					color gray
 </style>

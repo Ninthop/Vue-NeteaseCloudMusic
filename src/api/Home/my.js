@@ -11,12 +11,20 @@ const getSonglist = data => {
 const getUserlist = data => {
 	return request({
 		url: '/user/playlist',
-		method: 'get',
+		method: 'post',
 		params: data
+	})
+}
+
+const getUserSubcount = () => {
+	return request({
+		url: '/user/subcount',
+		method: 'post'
 	})
 }
 
 export {
 	getSonglist,
-	getUserlist
+	getUserlist,
+	getUserSubcount
 }

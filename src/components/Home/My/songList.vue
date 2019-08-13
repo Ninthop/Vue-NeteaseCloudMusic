@@ -1,9 +1,20 @@
 <template>
 	<div class="my-song">
-		<div class="my-song-title">创建的歌单</div>
+		<div class="my-song-title">创建的歌单 ({{ userSubcount.createdPlaylistCount }})</div>
 		<div v-for="item of songList" :key="item.id">
 			<div v-show="item.userId == uid" class="song-list" >
-				<img :src="item.coverImgUrl" alt="歌单封面" class="cover-img">
+				<img :src="item.coverImgUrl | formatPic" alt="歌单封面" class="cover-img">
+				<span class="list-title">
+					<div>{{ item.name }}</div>
+					<div class="song-num">{{ item.trackCount }}首</div>
+				</span>
+			</div>
+		</div>
+
+		<div class="my-song-title">收藏的歌单 ({{ userSubcount.subPlaylistCount }})</div>
+		<div v-for="(item, index) of songList" :key="index">
+			<div v-show="!(item.userId == uid)" class="song-list" >
+				<img :src="item.coverImgUrl | formatPic" alt="歌单封面" class="cover-img">
 				<span class="list-title">
 					<div>{{ item.name }}</div>
 					<div class="song-num">{{ item.trackCount }}首</div>
@@ -17,7 +28,8 @@
 export default {
 	name: 'MySonglist',
 	props: {
-		songList: Array
+		songList: Array,
+		userSubcount: Object
 	},
 	data () {
 		return {

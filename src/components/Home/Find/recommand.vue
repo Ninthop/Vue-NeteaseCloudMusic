@@ -2,12 +2,21 @@
 	<div class="find-rec">
 		<div class="title">
 			<span class="rec">推荐歌单</span>
-			<span class="list-square">歌单广场</span>
+			<span class="list-square" @click="changeNum">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#icon-SanMiAppiconfill"></use>
+				</svg>
+				换一换
+			</span>
 		</div>
 
 		<div class="content">
-			<span class="item" v-for="item of recList" :key="item.id">
-				<img :src="item.picUrl" alt="歌单封面">
+			<span class="item">
+				<div class="img"><img :src="recList[0].picUrl | formatPic" alt="歌单封面"></div>
+				<div class="item-title">{{ recList[0].name }}</div>
+			</span>
+			<span class="item" v-for="item of sixRecList" :key="item.id">
+				<div class="img"><img :src="item.picUrl | formatPic" alt="歌单封面"></div>
 				<div class="item-title">{{ item.name }}</div>
 			</span>
 		</div>
@@ -15,10 +24,36 @@
 </template>
 
 <script>
+import Vue from "vue"
 export default {
 	name: 'FindRecommand',
 	props: {
 		recList: Array
+	},
+	data () {
+		return {
+			startNum: 1,
+			endNum: 6,
+		}
+	},
+	computed: {
+		sixRecList () {
+			return this.recList.slice(this.startNum, this.endNum)
+		}
+	},
+	//切换推荐歌单数据
+	methods: {
+		changeNum () {
+			if (this.startNum < 1 + 5*2){
+				this.startNum += 5
+				this.endNum += 5
+				// console.log(this.startNum)
+				return
+			}
+			this.startNum = 1
+			this.endNum = 6
+			// console.log(this.sixRecList)
+		}
 	}
 }
 </script>
@@ -45,6 +80,9 @@ export default {
 				float right
 				margin .5rem 1rem 0 0
 				font-size $font-size-small
+				svg
+					height 1rem
+					width 1rem
 		.content
 			display flex
 			flex-direction row
@@ -57,19 +95,24 @@ export default {
 				margin-top 1rem
 				@media all and (max-width 768px)
 					width 29%
-				img
-					min-height 8rem
+				.img
+					// min-height 8rem
 					background-color lightgray
+					height 0
+					padding-bottom 100%
 					width 100%
+					overflow hidden
 					border-radius .4rem
+					img 
+						width 100%
 				.item-title
 					line-height 1.4rem
-					margin-top .2rem
-					letter-spacing .02rem
+					margin-top .5rem
 					overflow hidden
 					text-overflow ellipsis
 					display -webkit-box
 					-webkit-line-clamp 2
 					-webkit-box-orient vertical
+					font-size $font-size-normal
 
 </style>

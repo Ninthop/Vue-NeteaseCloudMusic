@@ -1,14 +1,20 @@
 const mutations = {
-    Login (state, num) {
-        state.loginType = num
+    changeLoginStatus (state, num) {
+		state.loginType = num
         try {
-            sessionStorage.loginType = num
+            localStorage.loginType = num
         } catch (error) {}
 	},
 	changeUid (state, uid) {
-        state.uid = uid
+		state.uid = uid
         try {
-            sessionStorage.uid = uid
+            localStorage.uid = uid
+        } catch (error) {}
+	},
+	changeUserInfo (state, userInfo) {
+		state.userInfo = userInfo
+        try {
+            localStorage.userInfo = userInfo
         } catch (error) {}
     }
 }

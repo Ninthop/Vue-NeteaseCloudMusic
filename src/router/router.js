@@ -30,7 +30,13 @@ export default[
 	{
 		path: '/user',
 		name: 'user',
+		meta: {logined: true},
 		component: () => import('../views/User.vue')
+	},
+	{
+		path: '/list',
+		name: 'list',
+		component: () => import('../views/List.vue')
 	},
 	{
 		path: '/test',

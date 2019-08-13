@@ -1,13 +1,15 @@
 import axios from 'axios'
 import * as util from '@/lib/util.js'
 
-const error = () => {
-    alert('连接错误，请刷新重试')
+const error = err => {
+	alert('连接错误，请重新连接或登陆')
+	console.log(err.response)
 }
 
 const service = axios.create({ 
     baseURL: 'http://localhost:3000',
-    timeout: 1000 * 10
+	timeout: 1000 * 10,
+	withCredentials: true
 });
 
 service.interceptors.request.use(
@@ -29,7 +31,7 @@ service.interceptors.response.use(
     },
     err => {
         util.endLoading()
-        error()
+        error(err)
         Promise.reject(err)
     }
 )

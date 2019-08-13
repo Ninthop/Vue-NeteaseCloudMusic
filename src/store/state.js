@@ -1,7 +1,8 @@
 const state = {
-	uid: sessionStorage.uid || {},
-	loginType: sessionStorage.loginType || 0,
-	playStatus: sessionStorage.playStatus || false
+	uid: localStorage.uid || {},
+	userInfo: localStorage.userInfo || {},
+	loginType: localStorage.loginType || 0,
+	playStatus: localStorage.playStatus || false
 }
 
 export default state

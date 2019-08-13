@@ -1,7 +1,7 @@
 <template>
 	<div class="home-my">
-		<my-toplist />
-		<my-songlist :songList="songList" />
+		<my-toplist :userSubcount="userSubcount" />
+		<my-songlist :songList="songList" :userSubcount="userSubcount" />
 	</div>
 </template>
 
@@ -14,26 +14,28 @@ export default {
 	name: 'HomeMy',
 	data () {
 		return {
-			songList: []
+			songList: [],
+			userSubcount: {}
 		}
 	},
 	components: {
 		MyToplist,
 		MySonglist
 	},
-	methods: {
-		getUserlist () {
-			apiMy.getUserlist({
-				uid: this.$store.state.uid
-			})
-			.then(res => {
-				console.log(res.playlist)
-				this.songList = res.playlist
-			})
-		}
-	},
 	mounted () {
-		this.getUserlist ()
+		apiMy.getUserlist({
+			uid: this.$store.state.uid
+		})
+		.then(res => {
+			// console.log(res.playlist)
+			this.songList = res.playlist
+		})
+
+		apiMy.getUserSubcount()
+		.then(res => {
+			// console.log(res)
+			this.userSubcount = res
+		})
 	}
 }
 </script>
