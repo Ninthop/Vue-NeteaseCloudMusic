@@ -11,14 +11,14 @@
 		</div>
 
 		<div class="content">
-			<span class="item">
+			<router-link :to="'/list/'+recList[0].id" tag="span" class="item">
 				<div class="img"><img :src="recList[0].picUrl | formatPic" alt="歌单封面"></div>
 				<div class="item-title">{{ recList[0].name }}</div>
-			</span>
-			<span class="item" v-for="item of sixRecList" :key="item.id">
+			</router-link>
+			<router-link tag="span" class="item" v-for="item of sixRecList" :key="item.id" :to="'/list/'+item.id">
 				<div class="img"><img :src="item.picUrl | formatPic" alt="歌单封面"></div>
 				<div class="item-title">{{ item.name }}</div>
-			</span>
+			</router-link>
 		</div>
 	</div>
 </template>

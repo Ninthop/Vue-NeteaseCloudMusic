@@ -36,7 +36,7 @@ export default {
 			let bool = this.$store.state.loginType
 			// console.log(bool)
 			if (bool == 1) {
-				// console.log('需要登陆')
+				console.log('已登陆')
 				apiFind.getLoginRec ({
 					timestamp: time.getTime(),
 				})
@@ -45,7 +45,7 @@ export default {
 					// console.log(res.recommend)
 				})
 			}else {
-				// console.log('不要登陆')
+				console.log('未登陆')
 				apiFind.getRecList ({
 					limit: 16
 				})
@@ -57,13 +57,6 @@ export default {
 		}
 	},
 	mounted () {
-		// console.log(this.$store.state.uid)
-		if (localStorage.loginType == 1) {
-			apiFind.refreshLogin()
-			.then(res => {
-				// console.log(res)
-			})
-		}
 		apiFind.getBanner ({
 			type: 1
 		})

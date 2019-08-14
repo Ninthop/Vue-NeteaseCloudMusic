@@ -34,7 +34,7 @@ export default[
 		component: () => import('../views/User.vue')
 	},
 	{
-		path: '/list',
+		path: '/list/:id',
 		name: 'list',
 		component: () => import('../views/List.vue')
 	},

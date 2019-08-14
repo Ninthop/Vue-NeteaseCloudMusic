@@ -11,7 +11,7 @@ const getSonglist = data => {
 const getUserlist = data => {
 	return request({
 		url: '/user/playlist',
-		method: 'post',
+		method: 'get',
 		params: data
 	})
 }
@@ -19,7 +19,7 @@ const getUserlist = data => {
 const getUserSubcount = () => {
 	return request({
 		url: '/user/subcount',
-		method: 'post'
+		method: 'get'
 	})
 }
 
