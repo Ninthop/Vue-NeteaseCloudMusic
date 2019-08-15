@@ -11,9 +11,7 @@ const error = err => {
 		logout()
 		.then(res => {
 			let num = 0
-			store.commit('changeLoginStatus', num)
-			store.commit('changeUid', {})
-			store.commit('changeUserInfo', {})
+			store.dispatch('logout')
 			router.replace('/')
 		})
 	}

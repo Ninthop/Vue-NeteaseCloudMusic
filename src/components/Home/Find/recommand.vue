@@ -10,7 +10,7 @@
 			</span>
 		</div>
 
-		<div class="content">
+		<div class="content" v-if="recList[0]">
 			<router-link :to="'/list/'+recList[0].id" tag="span" class="item">
 				<div class="img"><img :src="recList[0].picUrl | formatPic" alt="歌单封面"></div>
 				<div class="item-title">{{ recList[0].name }}</div>
@@ -28,12 +28,14 @@ import Vue from "vue"
 export default {
 	name: 'FindRecommand',
 	props: {
-		recList: Array
+		recList: {
+			type: Array,
+		}
 	},
 	data () {
 		return {
 			startNum: 1,
-			endNum: 6,
+			endNum: 6
 		}
 	},
 	computed: {

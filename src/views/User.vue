@@ -34,9 +34,7 @@ export default {
 				// localStorage.removeItem('userInfo')
 				// localStorage.removeItem('loginType')
 				let num = 0
-				this.$store.commit('changeLoginStatus', num)
-				this.$store.commit('changeUid', {})
-				this.$store.commit('changeUserInfo', {})
+				this.$store.dispatch('logout')
 				// console.log(localStorage.loginType)
 				this.$router.replace('/')
 			})
@@ -44,8 +42,7 @@ export default {
 	},
 	mounted () {
 		getUserInfo({
-			uid: this.$store.state.uid,
-			
+			uid: this.$store.state.uid
 		})
 		.then(res => {
 			this.userInfo = res

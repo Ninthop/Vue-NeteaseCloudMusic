@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<list-header :playList="playList" />
-		<song-content :playList="playList" />
+		<song-content :playList="playList" @listen="playMusic" />
 	</div>
 </template>
 
@@ -21,15 +21,21 @@ export default {
 		ListHeader,
 		SongContent
 	},
+	methods: {
+		playMusic ({song, index}) {
+			this.$store.dispatch('playMusic', {song, index})
+		}
+	},
 	activated() {
 		// console.log(this.$route.params.id)
 		getSonglist({
 			id: this.$route.params.id
 		})
 		.then(res => {
-			// console.log(res)
+			// console.log(res.playlist.tracks)
 			this.playList = res.playlist
 		})
+		// console.log(this.$store.state.fullScreen)
 	}
 }
 </script>

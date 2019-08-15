@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="list-header">
+		<div class="list-header" v-if="playList.creator">
 			<div class="bgimg-fa">
 				<div class="bgimg" 
 					:style="{  
@@ -18,7 +18,7 @@
 				<img :src="playList.coverImgUrl" alt="歌单封面" class="pic">
 				<div class="info">
 					<img :src="playList.creator.avatarUrl" alt="用户头像" class="user-avatar">
-					<div>
+					<div class="info-nickname">
 						{{ playList.creator.nickname }}
 					</div>
 				</div>
@@ -68,6 +68,7 @@ export default {
 
 <style lang="stylus" scoped>
     @import ('~_s/varibles.styl')
+    @import ('~_s/mixin.styl')
 	.list-header
 		height 20rem
 		width 100%
@@ -128,6 +129,9 @@ export default {
 				font-size $font-size-medium
 				display flex
 				flex-direction column
+				.info-nickname
+					ellipsis-one()
+					max-width 15rem
 				.user-avatar
 					height 4rem
 					width 4rem

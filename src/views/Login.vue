@@ -42,10 +42,9 @@ export default {
 				})
 				.then(res => {
 					// console.log(res.response)
-					console.log(res)
-					this.$store.commit('changeLoginStatus', res.data.loginType)
-					this.$store.commit('changeUid', res.data.account.id)
-					this.$store.dispatch('changeUserInfo')
+					// console.log(res)
+					let data = res.data
+					this.$store.dispatch('login', data)
 					this.$router.replace('/')
 				})
 				.catch(

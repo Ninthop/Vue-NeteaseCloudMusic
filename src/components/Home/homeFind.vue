@@ -38,7 +38,7 @@ export default {
 			if (bool == 1) {
 				console.log('已登陆')
 				apiFind.getLoginRec ({
-					timestamp: time.getTime(),
+					timestamp: time.getTime()
 				})
 				.then(res => {
 					this.recList = res.recommend

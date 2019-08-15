@@ -10,7 +10,12 @@
 			</div>
 		</div>
 
-		<div class="song" v-for="(item, index) of playList.tracks" :key="item.id">
+		<div 
+			class="song" 
+			v-for="(item, index) of playList.tracks" 
+			:key="item.id"
+			@click="listenMusic(playList.tracks, index)"
+		>
 			<div class="index">{{ index+1 }}</div>
 			<div class="song-body">
 				<span class="song-title">
@@ -18,7 +23,7 @@
 					<span class="rtUrl" v-if="item.rtUrl">{{ item.rtUrls }}</span>
 				</span>
 				<span class="author-and-cover">
-					<span class="ar" v-for="author of item.ar" :key="author.id">
+					<span class="ar" v-for="(author,index) of item.ar" :key="index">
 						{{ author.name }}
 					</span>
 					<span class="separator">-</span>
@@ -34,6 +39,11 @@
 		name: 'SongContent',
 		props: {
 			playList: Object
+		},
+		methods: {
+			listenMusic (song, index) {
+				this.$emit('listen', {song, index})
+			}
 		}
 	}
 </script>
@@ -48,7 +58,6 @@
 		width 100%
 		border-top-left-radius 1.5rem
 		border-top-right-radius 1.5rem
-		height 4rem
 		.content-head
 			padding 1rem 1rem 0 1rem
 			display flex
@@ -85,6 +94,7 @@
 					font-size $font-size-medium
 					margin-bottom .5rem
 					ellipsis-one()
+					min-height 1.5rem
 				.author-and-cover
 					display flex
 					flex-direction row
