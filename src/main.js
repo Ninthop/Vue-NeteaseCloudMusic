@@ -41,8 +41,9 @@ router.beforeEach ((to, from, next) => {
 
 
 Vue.filter('formatPic',
-  function(url) {
-	if (!url) return ''
-	return `${url}?param=200y200`
-  }
+	function(url) {
+		if (!url) return ''
+		return `${url}?param=200y200`
+	}
 )
+

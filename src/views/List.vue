@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<list-header :playList="playList" />
-		<song-content :playList="playList" @listen="playMusic" />
+		<song-content :playList="playList" @listen="playMusic" @playAll="playAll"/>
 	</div>
 </template>
 
@@ -24,6 +24,9 @@ export default {
 	methods: {
 		playMusic ({song, index}) {
 			this.$store.dispatch('playMusic', {song, index})
+		},
+		playAll (allSong) {
+			this.$store.dispatch('playAllMusic', allSong)
 		}
 	},
 	activated() {

@@ -37,6 +37,9 @@ const mutations = {
 	},
 	setSongUrl (state, url) {
 		state.songUrl = url
+	},
+	setLyric (state, lyric) {
+		state.lyric = lyric
 	}
 }
 

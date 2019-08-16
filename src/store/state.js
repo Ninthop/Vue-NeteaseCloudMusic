@@ -11,7 +11,8 @@ const state = {
 	sequenceList: [],
 	mode: playMode.sequence,
 	currentIndex: -1,
-	songUrl: ''
+	songUrl: '',
+	lyric: null
 }
 
 export default state

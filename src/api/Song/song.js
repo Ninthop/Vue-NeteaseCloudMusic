@@ -8,6 +8,15 @@ const getSong = data => {
 	})
 }
 
+const getLyric = data => {
+	return request({
+		url: '/lyric',
+		method: 'get',
+		params: data
+	})
+}
+
 export {
-	getSong
+	getSong,
+	getLyric
 }

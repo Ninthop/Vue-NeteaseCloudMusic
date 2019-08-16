@@ -64,7 +64,7 @@ export default {
 			this.list = res.banners
 			// console.log(res)
 		}),
-		this.getRec(),
+		// this.getRec(),
 		apiFind.getAlbum ()
 		.then(res => {
 			this.albumList = res.albums

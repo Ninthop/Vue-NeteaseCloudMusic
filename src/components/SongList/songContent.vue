@@ -4,7 +4,7 @@
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-yinzhi"></use>
 			</svg>
-			<div class="play-all">
+			<div class="play-all" @click="playAllSong(playList.tracks)">
 				播放全部
 				<span class="song-num">(共{{ playList.trackCount }}首)</span>
 			</div>
@@ -43,6 +43,10 @@
 		methods: {
 			listenMusic (song, index) {
 				this.$emit('listen', {song, index})
+				// console.log(song)
+			},
+			playAllSong (allSong) {
+				this.$emit('playAll', allSong)
 			}
 		}
 	}
