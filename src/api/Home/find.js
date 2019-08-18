@@ -11,7 +11,7 @@ const getBanner = data => {
 const getRecList = data => {
 	return request({
 		url: '/personalized',
-		methods: 'get',
+		method: 'get',
 		params: data
 	})
 }
@@ -19,7 +19,7 @@ const getRecList = data => {
 const getAlbum = data => {
 	return request({
 		url: '/album/newest',
-		methods: 'get',
+		method: 'get',
 		params: data
 	})
 }
@@ -27,7 +27,7 @@ const getAlbum = data => {
 const getLoginRec = data => {
 	return request({
 		url: '/recommend/resource',
-		methods: 'get',
+		method: 'get',
 		params: data
 	})
 }
@@ -35,7 +35,15 @@ const getLoginRec = data => {
 const refreshLogin = () => {
 	return request({
 		url: '/login/refresh',
-		methods: 'get'
+		method: 'get'
+	})
+}
+
+const getAlbumSong = data => {
+	return request({
+		url: '/album',
+		method: 'get',
+		params: data
 	})
 }
 
@@ -44,5 +52,6 @@ export {
 	getRecList,
 	getAlbum,
 	getLoginRec,
-	refreshLogin
+	refreshLogin,
+	getAlbumSong
 }

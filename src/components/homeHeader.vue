@@ -6,11 +6,11 @@
 			</svg>
 		</router-link>
 		<home-tab />
-		<span class="search">
+		<router-link to="/search" tag="span" class="search">
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-SanMiAppiconfill-copy"></use>
 			</svg>
-		</span>
+		</router-link>
 	</div>
 </template>
 

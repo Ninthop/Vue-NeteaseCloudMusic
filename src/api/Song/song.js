@@ -16,7 +16,25 @@ const getLyric = data => {
 	})
 }
 
+const getSongDetail = data => {
+	return request({
+		url: '/song/detail',
+		method: 'get',
+		params: data
+	})
+}
+
+const JuageCopyRight = data => {
+	return request({
+		url: '/check/music',
+		method: 'get',
+		params: data
+	})
+}
+
 export {
 	getSong,
-	getLyric
+	getLyric,
+	getSongDetail,
+	JuageCopyRight
 }

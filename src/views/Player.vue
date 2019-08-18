@@ -5,13 +5,13 @@
 			<div class="bgimg-fa" v-if="currentSong.al">
 				<div class="bgimg" 
 					:style="{  
-						background: `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8)), url('${formatBigPic(currentSong.al.picUrl)}') no-repeat center center`, 
+						background: `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8)), url('${formatBigPic(currentSong.al.picUrl || currentSong.artist.img1v1Url)}') no-repeat center center`, 
 						filter: 'blur(1rem)'
 					}"
 				>
 				</div>
 			</div>
-
+			<!-- 头部信息 -->
 			<span class="header">
 				<img src="@/assets/static/back.png" alt="返回图标" class="back" @click="routerBack">
 				<span class="play-title" v-if="currentSong.al">
@@ -28,27 +28,30 @@
 					</svg>
 				</span>
 			</span>
-
-			<div class="player-cover" v-if="currentSong.al">
-				<img :src="currentSong.al.picUrl | formatPic" alt="" class="cover-img">
-			</div>
-
-			<div class="lyric" ref="lyriclist">
-				<div class="lyric-wrapper">
-					<div class="lyric-content" v-if="currentLyric">
-						<p 
-							class="text"
-							ref="everyLyric"
-							:class="{'current': currentLineNum == index}"
-							v-for="(line, index) of currentLyric.lines"
-							:key="index"
-						>
-						{{ line.txt }}
-						</p>
+			<!-- 中间cd部分和歌词部分切换 -->
+			<div class="middle">
+				<fade>
+					<div class="player-cover" v-show="this.show" v-if="currentSong.al" @click="changeShow">
+						<img :src="currentSong.al.picUrl | formatPic" alt="" class="cover-img">
 					</div>
-				</div>
+				</fade>
+				<fade>
+					<div class="lyric-wrapper">
+						<scroll class="lyric-content" :data="currentLyricLines" ref="lyriclist">
+							<div>
+								<p v-if="this.currentLyric == null" class="text-none" ref="lyricLine">没有歌词。</p>
+								<p ref="lyricLine"
+								class="text"
+								v-else
+								:class="{'current': currentLineNum == index}"
+								v-for="(line,index) in currentLyricLines"
+								:key="index">{{line.txt}}</p>
+							</div>
+						</scroll>
+					</div>
+				</fade>
 			</div>
-
+			<!-- 时间轴 -->
 			<div class="time-wrapper">
 				<span class="time time-start">{{ formatTime(currentTime) }}</span>
 				<div class="progress-bar-wrapper">
@@ -89,11 +92,18 @@
 				</span>
 			</div>
 		</div>
+		<!-- 缩小后的播放器 -->
 		<div class="mini-player" v-show="!fullScreen" @click="openFullScreen">
 			<div class="mini-cover" v-if="currentSong.al">
 				<img :src="currentSong.al.picUrl | formatPic" alt="" class="mini-cover-img">
 			</div>
-			<div class="mini-info">
+			<div class="playing-lyric mini-info" v-if="this.currentLyric == null && this.playing">
+				<p>没有歌词</p>
+			</div>
+			<div class="playing-lyric mini-info" v-else-if="this.playing">
+				<p>{{ this.playingLyric }}</p>
+			</div>
+			<div class="mini-info" v-else>
 				<span class="mini-title">{{ currentSong.name }}</span>
 				<span class="mini-ar">
 					<span class="song-ar" v-for="author of currentSong.ar" :key="author.id">
@@ -128,6 +138,10 @@ import ProgressBar from '../components/Player/PorgressBar'
 import { playMode } from '_com/config/playMode'
 import { shuffle } from '@/lib/util.js'
 import Lyric from 'lyric-parser'
+import Fade from '../common/animate/fade'
+import Scroll from '../common/animate/scroll'
+// import BScroll from '@better-scroll/core'
+import { getLyric } from '@/api/Song/song'
 
 export default {
 	name: 'Player',
@@ -136,12 +150,15 @@ export default {
 			songReady: false,
 			currentTime: 0,
 			currentLineNum: 0,
-			show: true,
-			currentLyric: null
+			currentLyric: null,
+			currentLyricLines: null,
+			playingLyric: ''
 		}
 	},
 	components: {
-		ProgressBar
+		ProgressBar,
+		Fade,
+		Scroll
 	},
 	methods: {
 		routerBack () {
@@ -151,6 +168,7 @@ export default {
 		openFullScreen () {
 			this.$store.commit('setFullScreen', true)
 		},
+		// 切换播放状态
 		toggleStatus () {
 			if (!this.songReady) {
 				return
@@ -162,14 +180,17 @@ export default {
 			if (!this.songReady) {
 				return
 			}
-			let newIndex = this.currentIndex - 1
-			if (newIndex == -1) {
-				newIndex = this.playlist.length - 1
-			}
-			this.$store.dispatch('getLyric', this.playlist[newIndex].id)
-			this.$store.commit('setCurrentIndex', newIndex)
-			if (!this.playing) {
-				this.toggleStatus()
+			if (this.playlist.length == 1) {
+				this.loop()
+			}else {
+				let newIndex = this.currentIndex - 1
+				if (newIndex == -1) {
+					newIndex = this.playlist.length - 1
+				}
+				this.$store.commit('setCurrentIndex', newIndex)
+				if (!this.playing) {
+					this.toggleStatus()
+				}
 			}
 			this.songReady = false
 		},
@@ -177,17 +198,21 @@ export default {
 			if (!this.songReady) {
 				return
 			}
-			let newIndex = this.currentIndex + 1
-			if (newIndex == this.playlist.length) {
-				newIndex = 0
-			}
-			this.$store.dispatch('getLyric', this.playlist[newIndex].id)
-			this.$store.commit('setCurrentIndex', newIndex)
-			if (!this.playing) {
-				this.toggleStatus()
+			if (this.playlist.length == 1) {
+				this.loop()
+			}else {
+				let newIndex = this.currentIndex + 1
+				if (newIndex == this.playlist.length) {
+					newIndex = 0
+				}
+				this.$store.commit('setCurrentIndex', newIndex)
+				if (!this.playing) {
+					this.toggleStatus()
+				}
 			}
 			this.songReady = false
 		},
+		// 音频处理
 		ready () {
 			this.songReady = true
 		},
@@ -204,16 +229,22 @@ export default {
 				this.nextSong()				
 			}
 		},
+		// 单曲循环
 		loop () {
 			this.$refs.audio.currentTime = 0
 			this.$refs.audio.play()
+			if (this.currentLyric) {
+				this.currentLyric.seek(0)
+			}
 		},
+		// 音频开始时间初始化
 		formatTime (time) {
 			time = time | 0
 			const minute = time / 60 | 0
 			const second = this.completion(time % 60, 2)
 			return `${minute}:${second}`
 		},
+		// 音频总时长初始化
 		formatAlltime (time) {
 			time = time / 1000 | 0
 			time = time | 0
@@ -221,6 +252,7 @@ export default {
 			const second = this.completion(time % 60, 2)
 			return `${minute}:${second}`
 		},
+		// 音频补0
 		completion (num, n) {
 			let length = num.toString().length
 			while (length < n) {
@@ -229,17 +261,23 @@ export default {
 			}
 			return num
 		},
+		// 图片压缩
 		formatBigPic(url) {
 			if (!url) return ''
 			return `${url}?param=200y200`
 		},
+		// 时间轴百分比设置
 		setPer (per) {
 			// console.log(this.$refs.audio.currentTime)
 			this.$refs.audio.currentTime = (this.currentSong.dt/1000) * per
 			if (!this.playing) {
 				this.playingSong()
 			}
+			if (this.currentLyric) {
+				this.currentLyric.seek(this.$refs.audio.currentTime * 1000)
+			}
 		},
+		// 播放模式设置
 		setMode () {
 			const mode = (this.mode + 1) % 3
 			this.$store.commit('setMode', mode)
@@ -252,12 +290,14 @@ export default {
 			this.$store.commit('setPlaylist', songlist)
 			this.formatCurrentIndex(songlist)
 		},
+		// 更改播放模式时，定住当前序号
 		formatCurrentIndex (list) {
 			let index = list.findIndex(item => {
 				return item.id === this.currentSong.id
 			})
 			this.$store.commit('setCurrentIndex', index)
 		},
+		// 播放切换
 		playingSong () {
 			if (!this.songReady) {
 				return
@@ -265,17 +305,45 @@ export default {
 			const audio = this.$refs.audio
 			const newStatus = !this.playing
 			this.$store.commit('setPlayingStatus', newStatus)
+			if (this.currentLyric) {
+				this.currentLyric.togglePlay()
+			}
 			return newStatus ? audio.play() : audio.pause()
 		},
-		getLyric () {
-			this.currentLyric = new Lyric(this.lyric, this.handleLyric)
-			if (this.playing) {
-				this.currentLyric.play()
-			}
-			console.log(this.currentLyric.lines)
+		// 获取歌词，并使用lyric-parse处理
+		getCurrentLyric () {
+			getLyric({
+				id: this.currentSong.id
+			})
+			.then(res => {
+				if (res.nolyric){
+					this.currentLyric = null
+					this.currentLineNum = 0
+					console.log('没有歌词')
+				}else {
+					this.currentLyric = new Lyric(res.lrc.lyric, this.handleLyric)
+					this.currentLyricLines = this.currentLyric.lines
+					if (this.playing) {
+						this.currentLyric.play()
+					}
+					// console.log(this.currentLyric)
+				}
+			})
 		},
+		// lyric回调函数
 		handleLyric ({lineNum, txt}) {
 			this.currentLineNum = lineNum
+			if (lineNum > 4) {
+				let curLine = this.$refs.lyricLine[lineNum - 4]
+				this.$refs.lyriclist.scrollToElement(curLine, 1000)
+			}else {
+				this.$refs.lyriclist.scrollTo(0, 0, 1000)
+			}
+			this.playingLyric = txt
+		},
+		// 切换cd和歌词显示
+		changeShow () {
+			this.$store.commit('setShow', !this.show)
 		}
 	},
 	computed: {
@@ -288,31 +356,40 @@ export default {
 			'currentIndex',
 			'mode',
 			'sequenceList',
-			'lyric'
+			'show'
 		]),
+		// 播放图标
 		playIcon () {
 			return this.playing ? '#icon-bofang1' : '#icon-bofang'
 		},
+		// 迷你播放图标
 		miniPlayIcon () {
 			return this.playing ? '#icon-bofang-zanting' : '#icon-zanting'
 		},
+		// 播放模式图标
 		modeIcon () {
 			return this.mode == playMode.sequence ? '#icon-mayi-shunxubofang' : 
 					(this.mode == playMode.loop ? '#icon-danquxunhuan' : '#icon-suijibofang')
 		},
+		// 百分比计算
 		percent () {
 			// console.log(this.currentTime / (this.currentSong.dt/1000))
 			return this.currentTime / (this.currentSong.dt/1000)
 		}
 	},
 	watch: {
+		// 监听音乐url变化，获取歌词并更改状态，达到切换就播放的效果
 		songUrl () {
-			this.$nextTick(() => {
+			if (this.currentLyric) {
+				this.currentLyric.stop()
+			}
+			setTimeout(() => {
 				this.$refs.audio.play()
-				this.getLyric()
+				this.getCurrentLyric()
 				this.$store.commit('setPlayingStatus', true)
-			})
+			}, 200)
 		},
+		// 监听当前歌曲变化，获取新歌的url
 		currentSong (newSong) {
 			getSong({
 				id: newSong.id
@@ -391,37 +468,53 @@ export default {
 				.share
 					position absolute
 					right 1rem
-			.player-cover
-				display flex
-				justify-content center
-				align-items center
+			.middle
+				position relative
 				height 65%
-				border .1rem solid red
-				.cover-img
-					height 18rem
-					width 18rem
-					border-radius 50%
-					border .5rem solid rgba(149, 175, 192, .5)
-			.lyric
-				width 100%
-				position absolute
-				top 10%
-				height 65%
-				z-index 300
-				display flex
-				justify-content center
+				.player-cover
+					position relative
+					z-index 100
+					display flex
+					justify-content center
+					align-items center
+					height 100%
+					// border .1rem solid red
+					.cover-img
+						height 18rem
+						width 18rem
+						border-radius 50%
+						border .5rem solid rgba(149, 175, 192, .5)
+						box-shadow 0 0 3rem .2rem lightgray
 				.lyric-wrapper
-					height 95%
-					width 80%
-					overflow hidden
-					.text
-						line-height 2rem
-						text-align center
-						color gray
-						font-size $font-size-medium
-						transition 0.3s
-						&.current
+					position absolute
+					top 0
+					width 100%
+					height 100%
+					display flex
+					justify-content center
+					align-items center
+					.lyric-content
+						height 90%
+						width 80%
+						overflow hidden
+						.text
+							line-height 2rem
+							text-align center
+							color gray
+							font-size $font-size-medium
+							transition 0.3s
+							&.current
+								color white
+								box-shadow 0 .7rem .7rem -.7rem gray; 
+								transition 0.3s
+						.text-none
+							display flex
+							justify-content center
+							align-items center
+							height 50vh
+							line-height 2rem
 							color white
+							font-size $font-size-medium
 							transition 0.3s
 			.player-bottom
 				display flex
@@ -473,8 +566,9 @@ export default {
 				display flex
 				flex-direction column
 				justify-content center
+				// border .1rem solid red
 				margin-left 1rem
-				padding-top .2rem
+				// padding-top .2rem
 				.mini-title
 					font-size $font-size-normal
 					margin-bottom .2rem
@@ -491,7 +585,17 @@ export default {
 							margin-right .3rem
 						&:nth-last-child(1)
 							&:after
-								content ''
+								content none
+			.playing-lyric
+				p
+					line-height 1.3rem
+					max-width 18rem
+					font-size $font-size-normal
+					// min-height 1.2rem
+					min-height 1.4rem
+					ellipsis-one()
+					@media all and (min-width 768px)
+						max-width 100rem
 			.mini-play
 				position absolute
 				right 3%

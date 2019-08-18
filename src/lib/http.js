@@ -9,8 +9,7 @@ const error = err => {
 	console.log(err.response.data)
 	if (err.response.data.msg == "需要登录") {
 		logout()
-		.then(res => {
-			let num = 0
+		.then(() => {
 			store.dispatch('logout')
 			router.replace('/')
 		})
@@ -22,6 +21,8 @@ const service = axios.create({
 	timeout: 1000 * 10,
 	withCredentials: true
 });
+
+service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 service.interceptors.request.use(
     config => {

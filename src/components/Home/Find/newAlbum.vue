@@ -2,11 +2,16 @@
 	<div class="find-album">
 		<div class="title">
 			<span class="new-album">新碟</span>
-			<span class="more-album">更多新碟</span>
+			<span class="more-album" @click="changeNum">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#icon-SanMiAppiconfill"></use>
+				</svg>
+				换一换
+			</span>
 		</div>
 
 		<div class="content">
-			<span class="item" v-for="item of albumList.slice(0, 3)" :key="item.id">
+			<span class="item" v-for="(item,index) of albumList.slice(this.startNum, this.endNum)" :key="item.id" @click="paly(albumList[index])">
 				<img :src="item.picUrl | formatPic" alt="歌单封面">
 				<div class="item-title">{{ item.name }}</div>
 				<div class="author">{{ item.artist.name }}</div>
@@ -20,6 +25,27 @@ export default {
 	name: 'FindAlbum',
 	props: {
 		albumList: Array
+	},
+	data () {
+		return {
+			startNum: 0,
+			endNum: 6
+		}
+	},
+	methods: {
+		paly (song) {
+			console.log(song)
+			this.$store.dispatch('getAlbumSong', song.id)
+		},
+		changeNum () {
+			if (this.startNum < 6){
+				this.startNum += 6
+				this.endNum += 6
+				return
+			}
+			this.startNum = 0
+			this.endNum = 6
+		}
 	}
 }
 </script>
@@ -46,6 +72,9 @@ export default {
 				float right
 				margin .5rem 1rem 0 0
 				font-size $font-size-small
+				svg
+					height 1rem
+					width 1rem
 		.content
 			display flex
 			flex-direction row
@@ -60,7 +89,7 @@ export default {
 				@media all and (max-width 768px)
 					width 29%
 				img
-					min-height 8rem
+					min-height 9rem
 					background-color lightgray
 					width 100%
 					border-radius .4rem

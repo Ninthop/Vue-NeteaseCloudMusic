@@ -1,5 +1,5 @@
 <template>
-  <div ref="wrapper">
+  <div ref="wrapper" v-show="show" @click="coverShow">
     <slot></slot>
   </div>
 </template>
@@ -37,7 +37,7 @@
         type: Number,
         default: 20
       }
-    },
+	},
     mounted() {
       setTimeout(() => {
         this._initScroll()
@@ -88,14 +88,25 @@
       },
       scrollToElement() {
         this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
-      }
+	  },
+	  coverShow () {
+		  this.$store.commit('setShow', !this.$store.state.show)
+	  }
     },
     watch: {
       data() {
         setTimeout(() => {
           this.refresh()
         }, this.refreshDelay)
-      }
+	  }
+	},
+	computed: {
+		show () {
+			this.$nextTick(() => {
+				this._initScroll()
+			})
+			return !this.$store.state.show
+		}
     }
   }
 </script>

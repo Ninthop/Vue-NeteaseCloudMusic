@@ -4,7 +4,7 @@ import router from './router/'
 import store from './store/'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import { Loading } from 'element-ui'
+import { Loading, Tabs } from 'element-ui'
 import './assets/style/reset.css'
 import './assets/style/border.css'
 import './assets/style/iconfont.css'
@@ -15,6 +15,8 @@ import 'swiper/dist/css/swiper.css'
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 Vue.use(Loading)
+Vue.use(Tabs)
+
 
 new Vue({
   router,

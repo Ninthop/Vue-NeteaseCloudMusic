@@ -38,8 +38,26 @@ const mutations = {
 	setSongUrl (state, url) {
 		state.songUrl = url
 	},
-	setLyric (state, lyric) {
-		state.lyric = lyric
+	setShow (state) {
+		state.show = !state.show
+	},
+	setAdvice(state, advice) {
+		state.searchAdvice = advice
+	},
+	setHotSearch(state, hot) {
+		state.hotSearch = hot
+	},
+	setSearchResult(state, searchResult) {
+		state.searchResult = searchResult
+	},
+	setResultShow(state, bool) {
+		state.resultShow = bool
+	},
+	setSearchType(state, type) {
+		state.searchType = type
+	},
+	setKeyWords(state, keyWords) {
+		state.keyWords = keyWords
 	}
 }
 

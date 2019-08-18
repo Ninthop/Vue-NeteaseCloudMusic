@@ -1,10 +1,12 @@
 <template>
-	
+	<div class="playlist">
+		
+	</div>
 </template>
 
 <script>
 export default {
-	name: 'transition'
+	name: 'PlayList'
 }
 </script>
 

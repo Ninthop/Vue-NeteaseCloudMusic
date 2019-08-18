@@ -1,33 +1,23 @@
 <template>
-	<div class="song-content">
-		<div class="content-head">
-			<svg class="icon" aria-hidden="true">
-				<use xlink:href="#icon-yinzhi"></use>
-			</svg>
-			<div class="play-all" @click="playAllSong(playList.tracks)">
-				播放全部
-				<span class="song-num">(共{{ playList.trackCount }}首)</span>
-			</div>
-		</div>
-
+	<div class="base-list">
 		<div 
 			class="song" 
-			v-for="(item, index) of playList.tracks" 
+			v-for="(item, index) of searchResult.songs" 
 			:key="item.id"
-			@click="listenMusic(playList.tracks, index)"
+			@click="listenMusic(searchResult.songs[index], item.mark)"
 		>
 			<div class="index">{{ index+1 }}</div>
 			<div class="song-body">
 				<span class="song-title">
 					{{ item.name }}
-					<span class="rtUrl" v-if="item.rtUrl">{{ item.rtUrls }}</span>
 				</span>
 				<span class="author-and-cover">
-					<span class="ar" v-for="(author,index) of item.ar" :key="index">
+					<span class="ar" v-for="(author,index) of item.artists" :key="index">
 						{{ author.name }}
+						<span class="rtUrl" v-if="item.rtUrl">{{ item.rtUrls }}</span>
 					</span>
 					<span class="separator">-</span>
-					<span class="cover">{{ item.al.name }}</span>
+					<span class="cover">{{ item.album.name }}</span>
 				</span>
 			</div>
 		</div>
@@ -35,49 +25,38 @@
 </template>
 
 <script>
-	export default {
-		name: 'SongContent',
-		props: {
-			playList: Object
-		},
-		methods: {
-			listenMusic (song, index) {
-				this.$emit('listen', {song, index})
+import { mapState } from 'vuex';
+export default {
+	name: 'List',
+	methods: {
+		listenMusic (song, mark) {
+			if (mark == 8) {
+				alert('没有版权')
+			}else {
+				this.$emit('listen', song)
 				console.log(song)
-			},
-			playAllSong (allSong) {
-				this.$emit('playAll', allSong)
 			}
 		}
+	},
+	computed: {
+		...mapState([
+			'searchResult'
+		])
 	}
+}
 </script>
 
 <style lang="stylus" scoped>
 	@import ('~_s/varibles.styl')
 	@import ('~_s/mixin.styl')
-	.song-content
-		position relative
-		top -1.5rem
-		background-color white
-		width 100%
-		border-top-left-radius 1.5rem
-		border-top-right-radius 1.5rem
-		.content-head
-			padding 1rem 1rem 0 1rem
-			display flex
-			.play-all
-				font-size $font-size-medium
-				display flex
-				align-items center
-				margin-left .5rem
-				.song-num
-					margin-left 1rem
-					color gray
-					font-size $font-size-normal
+	.base-list
+		padding-top 1rem
 		.song
 			display flex
 			flex-direction row
-			margin 2rem 0
+			padding 1rem 0
+			background-color white
+			// border .1rem solid red
 			.index
 				height 3rem
 				width 3rem
@@ -103,6 +82,8 @@
 					display flex
 					flex-direction row
 					color gray
+					min-height 1.5rem
+					ellipsis-one()
 					span.ar
 						&:after
 							content '/'
@@ -114,5 +95,5 @@
 						ellipsis-one()
 					.separator
 						padding 0 .2rem
-						
+
 </style>

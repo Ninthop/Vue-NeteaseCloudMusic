@@ -39,6 +39,11 @@ export default[
 		component: () => import('../views/List.vue')
 	},
 	{
+		path: '/search/',
+		name: 'search',
+		component: () => import('../views/Search.vue')
+	},
+	{
 		path: '/test',
 		name: 'test',
 		component: () => import('../views/test.vue')
