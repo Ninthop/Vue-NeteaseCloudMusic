@@ -50,16 +50,6 @@ const actions = {
 		})
 	},
 
-	getSearchResult ({commit, rootState}) {
-		getSearchResult({
-			keywords: rootState.keyWords
-		})
-		.then(res => {
-			commit('setSearchResult',res.result)
-			// console.log(res.result)
-		})
-	},
-
 	login ({commit, dispatch}, data) {
 		console.log(data)
 		commit('changeLoginStatus', data.loginType)
@@ -80,20 +70,6 @@ const actions = {
 		commit('setCurrentIndex', index)
 		commit('setFullScreen', true)
 		commit('setPlayingStatus', true)
-	},
-
-	playSingleMusic({commit}, song) {
-		getSongDetail({
-			ids: song.id
-		})
-		.then(res => {
-			commit('setSequenceList', res.songs)
-			commit('setPlaylist', res.songs)
-			commit('setCurrentIndex', 0)
-			commit('setFullScreen', true)
-			commit('setPlayingStatus', true)
-			// console.log(res.songs)
-		})
 	},
 
 	getAlbumSong ({commit}, id) {
@@ -125,10 +101,25 @@ const actions = {
 			type: rootState.searchType
 		})
 		.then(res => {
-			// commit('setSearchResult',res.result)
-			console.log(res)
+			commit('setSearchResult',res.result)
+			// console.log(res.result)
 		})
-	}
+	},
+
+	playSingleMusic({commit,rootState}, song) {
+		getSongDetail({
+			ids: song.id
+		})
+		.then(res => {
+			commit('setSequenceList', res.songs)
+			// commit('setPlaylist', [])
+			commit('addPlaylist', res.songs[0])
+			commit('setCurrentIndex', rootState.playlist.length - 1)
+			commit('setFullScreen', true)
+			commit('setPlayingStatus', true)
+			console.log(res.songs[0])
+		})
+	},
 }
 
 export default actions

@@ -39,7 +39,7 @@ import Fade from '../common/animate/fade'
 import { mapGetters } from 'vuex'
 import RecSearch from '../components/Search/recSearch'
 import ListTab from '../components/Search/searchTab'
-import List from '../base/list'
+import List from '../components/Search/list'
 
 export default {
 	name: 'Search',
@@ -62,12 +62,14 @@ export default {
 		},
 		postKeywords () {
 			if (this.keyWords) {
-				this.$store.dispatch('getSearchResult', this.keyWords)
+				// this.$store.commit('setSearchType', 1)
+				this.$store.dispatch('getSearchResultType', this.keyWords)
 				this.$store.commit('setResultShow', true)
 			}
 		},
 		changeKey (hotKeywords) {
 			this.$store.commit('setKeyWords', hotKeywords)
+			this.postKeywords()
 		},
 		adviceAppear () {
 			this.show = true
@@ -88,7 +90,8 @@ export default {
 		...mapGetters([
 			'searchAdvice',
 			'resultShow',
-			'keyWords'
+			'keyWords',
+			'searchType'
 		]),
 		keyWords: {
 			get () {

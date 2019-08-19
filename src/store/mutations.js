@@ -26,6 +26,9 @@ const mutations = {
 	setPlaylist (state, list) {
 		state.playlist = list
 	},
+	addPlaylist (state, song) {
+		state.playlist.push(song)
+	},
 	setSequenceList (state, list) {
 		state.sequenceList = list
 	},
@@ -40,6 +43,9 @@ const mutations = {
 	},
 	setShow (state) {
 		state.show = !state.show
+	},
+	setplaylistIsShown (state, bool) {
+		state.playlistIsShown = bool
 	},
 	setAdvice(state, advice) {
 		state.searchAdvice = advice

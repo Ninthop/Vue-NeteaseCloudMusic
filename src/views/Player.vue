@@ -98,7 +98,12 @@
 				<img :src="currentSong.al.picUrl | formatPic" alt="" class="mini-cover-img">
 			</div>
 			<div class="playing-lyric mini-info" v-if="this.currentLyric == null && this.playing">
-				<p>没有歌词</p>
+				<span class="mini-title">{{ currentSong.name }}</span>
+				<span class="mini-ar">
+					<span class="song-ar" v-for="author of currentSong.ar" :key="author.id">
+						{{ author.name }}
+					</span>
+				</span>
 			</div>
 			<div class="playing-lyric mini-info" v-else-if="this.playing">
 				<p>{{ this.playingLyric }}</p>
@@ -115,11 +120,12 @@
 				<svg class="icon play" aria-hidden="true" @click.stop="playingSong">
 					<use :xlink:href="miniPlayIcon"></use>
 				</svg>
-				<svg class="icon list" aria-hidden="true">
+				<svg class="icon list" aria-hidden="true" @click.stop="playlistShow">
 					<use xlink:href="#icon-bianjigedanxinxi"></use>
 				</svg>
 			</div>
 		</div>
+		<play-list />
 		<audio 
 			ref="audio" 
 			@canplay="ready" 
@@ -135,13 +141,14 @@
 import { mapGetters } from 'vuex'
 import { getSong } from '../api/Song/song'
 import ProgressBar from '../components/Player/PorgressBar'
+import PlayList from '../components/Player/playList'
 import { playMode } from '_com/config/playMode'
 import { shuffle } from '@/lib/util.js'
 import Lyric from 'lyric-parser'
 import Fade from '../common/animate/fade'
 import Scroll from '../common/animate/scroll'
-// import BScroll from '@better-scroll/core'
 import { getLyric } from '@/api/Song/song'
+
 
 export default {
 	name: 'Player',
@@ -158,7 +165,8 @@ export default {
 	components: {
 		ProgressBar,
 		Fade,
-		Scroll
+		Scroll,
+		PlayList
 	},
 	methods: {
 		routerBack () {
@@ -323,6 +331,7 @@ export default {
 				}else {
 					this.currentLyric = new Lyric(res.lrc.lyric, this.handleLyric)
 					this.currentLyricLines = this.currentLyric.lines
+					console.log('lyric')
 					if (this.playing) {
 						this.currentLyric.play()
 					}
@@ -344,6 +353,9 @@ export default {
 		// 切换cd和歌词显示
 		changeShow () {
 			this.$store.commit('setShow', !this.show)
+		},
+		playlistShow () {
+			this.$store.commit('setplaylistIsShown', true)
 		}
 	},
 	computed: {

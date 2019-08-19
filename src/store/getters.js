@@ -7,6 +7,7 @@ const getters = {
 	currentIndex: state => state.currentIndex,
 	songUrl: state => state.songUrl,
 	show: state => state.show,
+	playlistIsShown: state => state.playlistIsShown,
 	searchAdvice: state => state.searchAdvice,
 	hotSearch: state => state.hotSearch,
 	searchResult: state => state.searchResult,

@@ -1,20 +1,20 @@
 <template>
-	<div class="song-content">
+	<div class="singer-content">
 		<div class="content-head">
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-yinzhi"></use>
 			</svg>
-			<div class="play-all" @click="playAllSong(playList.tracks)">
+			<div class="play-all" @click="playAllSong(playList)">
 				播放全部
-				<span class="song-num">(共{{ playList.trackCount }}首)</span>
+				<span class="song-num">(共{{ playList.length }}首)</span>
 			</div>
 		</div>
 
 		<div 
 			class="song" 
-			v-for="(item, index) of playList.tracks" 
+			v-for="(item, index) of playList" 
 			:key="item.id"
-			@click="listenMusic(playList.tracks, index)"
+			@click="listenMusic(playList, index)"
 		>
 			<div class="index">{{ index+1 }}</div>
 			<div class="song-body">
@@ -38,7 +38,7 @@
 	export default {
 		name: 'SongContent',
 		props: {
-			playList: Object
+			playList: Array
 		},
 		methods: {
 			listenMusic (song, index) {
@@ -55,9 +55,9 @@
 <style lang="stylus" scoped>
 	@import ('~_s/varibles.styl')
 	@import ('~_s/mixin.styl')
-	.song-content
-		position relative
-		top -1.5rem
+	.singer-content
+		position absolute
+		top 30%
 		background-color white
 		width 100%
 		border-top-left-radius 1.5rem
@@ -112,7 +112,5 @@
 								content ''
 					.cover
 						ellipsis-one()
-					.separator
-						padding 0 .2rem
 						
 </style>

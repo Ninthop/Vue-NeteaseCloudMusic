@@ -24,7 +24,6 @@ export default {
 				{name: '单曲', id: 1},
 				{name: '歌手', id: 100},
 				{name: '歌单', id: 1000},
-				{name: '专辑', id: 10},
 			]
 		}
 	},
@@ -32,6 +31,7 @@ export default {
 		setId (id) {
 			this.$store.commit('setSearchType', id)
 			this.$store.dispatch('getSearchResultType', id)
+			console.log(this.searchType)
 		}
 	},
 	computed: {

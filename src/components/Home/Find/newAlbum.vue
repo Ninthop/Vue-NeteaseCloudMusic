@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="content">
-			<span class="item" v-for="(item,index) of albumList.slice(this.startNum, this.endNum)" :key="item.id" @click="paly(albumList[index])">
+			<span class="item" v-for="(item,index) of sixRecList" :key="item.id" @click="play(sixRecList[index])">
 				<img :src="item.picUrl | formatPic" alt="歌单封面">
 				<div class="item-title">{{ item.name }}</div>
 				<div class="author">{{ item.artist.name }}</div>
@@ -32,8 +32,13 @@ export default {
 			endNum: 6
 		}
 	},
+	computed: {
+		sixRecList () {
+			return this.albumList.slice(this.startNum, this.endNum)
+		}
+	},
 	methods: {
-		paly (song) {
+		play (song) {
 			console.log(song)
 			this.$store.dispatch('getAlbumSong', song.id)
 		},

@@ -49,3 +49,14 @@ Vue.filter('formatPic',
 	}
 )
 
+Vue.filter('formatDate',
+	function(date) {
+		if (date < 100000) {
+			return date
+		}else {
+			let newDate = `${data / 10000}.${(date/1000)%100}`
+			return newDate
+		}
+	}
+)
+

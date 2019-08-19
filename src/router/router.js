@@ -44,6 +44,11 @@ export default[
 		component: () => import('../views/Search.vue')
 	},
 	{
+		path: '/singer/:id',
+		name: 'singer',
+		component: () => import('../views/Singer.vue')
+	},
+	{
 		path: '/test',
 		name: 'test',
 		component: () => import('../views/test.vue')

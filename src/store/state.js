@@ -15,6 +15,7 @@ const state = {
 	currentIndex: -1,
 	songUrl: '',
 	show: true,  //歌词cd页面切换
+	playlistIsShown: false,
 
 	//搜索相关
 	searchAdvice: {},

@@ -35,7 +35,7 @@ export default {
 			id: this.$route.params.id
 		})
 		.then(res => {
-			// console.log(res.playlist.tracks)
+			// console.log(res)
 			this.playList = res.playlist
 		})
 		// console.log(this.$store.state.fullScreen)

@@ -32,9 +32,18 @@ const JuageCopyRight = data => {
 	})
 }
 
+const getSingerSong = data => {
+	return request({
+		url: '/artists',
+		method: 'get',
+		params: data
+	})
+}
+
 export {
 	getSong,
 	getLyric,
 	getSongDetail,
-	JuageCopyRight
+	JuageCopyRight,
+	getSingerSong
 }
