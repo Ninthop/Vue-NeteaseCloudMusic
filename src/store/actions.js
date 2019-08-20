@@ -19,7 +19,7 @@ const actions = {
 	getAdvice ({commit}, newWords) {
 		axios({
 			method: 'get',
-			url:'http://localhost:3000/search/suggest',
+			url:'http://47.102.127.79:80/search/suggest',
 			params: {
 				keywords: newWords, 
 				type: 'mobile', 

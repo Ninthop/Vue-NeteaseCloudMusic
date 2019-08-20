@@ -36,7 +36,7 @@ export default {
 			if (this.loginForm.phone === '' || this.loginForm.password === '') {
         		alert('账号或密码不能为空');
 			}else {
-				axios.get('http://localhost:3000/login/cellphone',{
+				axios.get('http://47.102.127.79:80/login/cellphone',{
 					params: this.loginForm,
 					withCredentials: true
 				})

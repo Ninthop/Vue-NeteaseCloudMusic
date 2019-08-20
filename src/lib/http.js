@@ -16,8 +16,8 @@ const error = err => {
 	}
 }
 
-const service = axios.create({ 
-    baseURL: 'http://localhost:3000',
+const service = axios.create({
+    baseURL: 'http://47.102.127.79:80',
 	timeout: 1000 * 10,
 	withCredentials: true
 });
