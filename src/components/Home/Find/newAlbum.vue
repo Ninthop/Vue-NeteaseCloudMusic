@@ -39,7 +39,7 @@ export default {
 	},
 	methods: {
 		play (song) {
-			console.log(song)
+			// console.log(song)
 			this.$store.dispatch('getAlbumSong', song.id)
 		},
 		changeNum () {

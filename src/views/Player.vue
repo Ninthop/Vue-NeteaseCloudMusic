@@ -172,6 +172,7 @@ export default {
 		routerBack () {
 			// console.log(this.currentSong),
 			this.$store.commit('setFullScreen', false)
+			this.$store.commit('setShow', true)
 		},
 		openFullScreen () {
 			this.$store.commit('setFullScreen', true)
@@ -327,11 +328,11 @@ export default {
 				if (res.nolyric){
 					this.currentLyric = null
 					this.currentLineNum = 0
-					console.log('没有歌词')
+					// console.log('没有歌词')
 				}else {
 					this.currentLyric = new Lyric(res.lrc.lyric, this.handleLyric)
 					this.currentLyricLines = this.currentLyric.lines
-					console.log('lyric')
+					// console.log('lyric')
 					if (this.playing) {
 						this.currentLyric.play()
 					}
@@ -407,8 +408,9 @@ export default {
 				id: newSong.id
 			})
 			.then(res => {
-				// console.log(res.data[0].url)
 				this.$store.commit('setSongUrl', res.data[0].url)
+				// console.log(this.$store.state.recentPlay)
+				this.$store.commit('addRecentPlay', newSong)
 			})
 		}
 	}

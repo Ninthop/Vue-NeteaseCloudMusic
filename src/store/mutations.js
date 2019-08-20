@@ -41,8 +41,8 @@ const mutations = {
 	setSongUrl (state, url) {
 		state.songUrl = url
 	},
-	setShow (state) {
-		state.show = !state.show
+	setShow (state, bool) {
+		state.show = bool
 	},
 	setplaylistIsShown (state, bool) {
 		state.playlistIsShown = bool
@@ -64,6 +64,10 @@ const mutations = {
 	},
 	setKeyWords(state, keyWords) {
 		state.keyWords = keyWords
+	},
+	addRecentPlay(state, song) {
+		state.recentPlay.unshift(song)
+		// console.log(state.recentPlay)
 	}
 }
 

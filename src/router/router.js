@@ -36,7 +36,7 @@ export default[
 	{
 		path: '/list/:id',
 		name: 'list',
-		component: () => import('../views/List.vue')
+		component: () => import('../views/SongList.vue')
 	},
 	{
 		path: '/search/',
@@ -47,6 +47,11 @@ export default[
 		path: '/singer/:id',
 		name: 'singer',
 		component: () => import('../views/Singer.vue')
+	},
+	{
+		path: '/recentsong',
+		name: 'recentsong',
+		component: () => import('../views/RecentSong.vue')
 	},
 	{
 		path: '/test',

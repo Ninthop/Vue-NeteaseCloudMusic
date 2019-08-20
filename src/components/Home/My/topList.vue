@@ -4,7 +4,7 @@
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-yinzhi"></use>
 			</svg>
-			<span class="recent-title">最近播放<span class="number">(0)</span></span>
+			<router-link to="/recentsong" tag="span" class="recent-title">最近播放<span class="number">({{ recentPlay.length }})</span></router-link>
 		</div>
 		<div class="collect toplist">
 			<svg class="icon" aria-hidden="true">
@@ -16,11 +16,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
 	name: 'MyTop',
 	props: {
 		userSubcount: Object
+	},
+	computed: {
+		...mapGetters([
+			'recentPlay'
+		])
 	}
 }
 </script>

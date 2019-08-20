@@ -13,7 +13,7 @@
 		<div 
 			class="song" 
 			v-for="(item, index) of playList.tracks" 
-			:key="item.id"
+			:key="index"
 			@click="listenMusic(playList.tracks, index)"
 		>
 			<div class="index">{{ index+1 }}</div>
@@ -28,6 +28,8 @@
 					</span>
 					<span class="separator">-</span>
 					<span class="cover">{{ item.al.name }}</span>
+					<span class="vip" v-if="item.fee == 1 || item.fee == 16">Vip</span>
+					<span class="vip" v-if="item.fee == 4">需购专辑</span>
 				</span>
 			</div>
 		</div>
@@ -42,8 +44,17 @@
 		},
 		methods: {
 			listenMusic (song, index) {
-				this.$emit('listen', {song, index})
-				// console.log(song)
+				if (song[index].st == 0 && song[index].fee != 1 && song[index].fee != 4 && song[index].fee != 16) {
+					this.$emit('listen', {song, index})
+					// console.log(song)
+				}else if (song[index].st == 0 &&　(song[index].fee == 1 || song[index].fee == 16)) {
+					alert('需要Vip')
+				}else if (song[index].fee == 4) {
+					alert('需要购买专辑')
+				}
+				else {
+					alert('没有版权')
+				}
 			},
 			playAllSong (allSong) {
 				this.$emit('playAll', allSong)
@@ -114,5 +125,11 @@
 						ellipsis-one()
 					.separator
 						padding 0 .2rem
+					.vip
+						color red
+						margin-left 1rem
+						border .1rem solid red
+						padding .1rem .2rem
+						border-radius .3rem
 						
 </style>

@@ -70,6 +70,8 @@ const actions = {
 		commit('setCurrentIndex', index)
 		commit('setFullScreen', true)
 		commit('setPlayingStatus', true)
+		// commit('addRecentPlay', song[index])
+		// console.log(999)
 	},
 
 	getAlbumSong ({commit}, id) {
@@ -93,6 +95,8 @@ const actions = {
 		commit('setFullScreen', true)
 		commit('setPlayingStatus', true)
 		commit('setMode', playMode.sequence)
+		// commit('addRecentPlay', allSong[0])
+		// console.log(999)
 	},
 
 	getSearchResultType ({commit, rootState}) {
@@ -117,7 +121,8 @@ const actions = {
 			commit('setCurrentIndex', rootState.playlist.length - 1)
 			commit('setFullScreen', true)
 			commit('setPlayingStatus', true)
-			console.log(res.songs[0])
+			// commit('addRecentPlay', songs[index])
+			// console.log(999)
 		})
 	},
 }

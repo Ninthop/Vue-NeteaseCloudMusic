@@ -1,7 +1,7 @@
 <template>
-	<div class="play-list" v-show="this.playlistIsShown" @touchmove.prevent @click.prevent>
+	<div class="play-list" v-show="this.playlistIsShown" @touchmove.prevent>
 		<div class="mask"></div>
-		<div class="playlist-body">
+		<div class="playlist-body" @click.stop>
 			<div class="content-head">
 				<svg class="icon" aria-hidden="true">
 					<use xlink:href="#icon-yinzhi"></use>
@@ -16,7 +16,7 @@
 					<div 
 						class="song" 
 						v-for="(item, index) of playlist" 
-						:key="item.id"
+						:key="index"
 						@click.stop="listenMusic(playlist, index)">
 						<div class="index">{{ index+1 }}</div>
 						<div class="song-body">
@@ -49,7 +49,7 @@ export default {
 		listenMusic (song, index) {
 				this.$store.dispatch('playMusic', {song, index})
 				this.$store.commit('setplaylistIsShown', false)
-				console.log(song)
+				// console.log(song)
 			},
 			playAllSong (allSong) {
 				this.$store.dispatch('playAllMusic', allSong)
@@ -90,6 +90,7 @@ export default {
 
 <style lang="stylus" scoped>
 	@import ('~_s/varibles.styl')
+	@import ('~_s/mixin.styl')
 	.play-list
 		.mask
 			position fixed
@@ -158,6 +159,7 @@ export default {
 								flex-direction row
 								color gray
 								span.ar
+									min-height 1.2rem
 									&:after
 										content '/'
 										margin-right .3rem

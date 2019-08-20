@@ -19,7 +19,8 @@
 						</span>
 						<span class="separator">-</span>
 						<span class="cover">{{ item.album.name }}</span>
-						<span class="vip" v-if="item.fee == 1 || item.fee == 4 || item.fee == 16">Vip</span>
+						<span class="vip" v-if="item.fee == 1 || item.fee == 16">Vip</span>
+						<span class="vip" v-if="item.fee == 4">需购专辑</span>
 					</span>
 				</div>
 			</div>
@@ -83,11 +84,14 @@ export default {
 					this.$emit('listen', song)
 					// console.log(res.privileges[0])
 					// console.log(song)
-				}else if (res.privileges[0].st == 0 &&　(res.privileges[0].fee == 1 || res.privileges[0].fee == 4 || res.privileges[0].fee == 16)) {
+				}else if (res.privileges[0].st == 0 &&　(res.privileges[0].fee == 1 || res.privileges[0].fee == 16)) {
 					alert('需要Vip')
 					// console.log(res.privileges[0])
 					// console.log(song)
-				}else {
+				}else if (res.privileges[0].fee == 4) {
+					alert('需要购买专辑')
+				}
+				else {
 					alert('没有版权')
 					// console.log(res.privileges[0])
 					// console.log(song)

@@ -31,7 +31,7 @@ export default {
 		setId (id) {
 			this.$store.commit('setSearchType', id)
 			this.$store.dispatch('getSearchResultType', id)
-			console.log(this.searchType)
+			// console.log(this.searchType)
 		}
 	},
 	computed: {
