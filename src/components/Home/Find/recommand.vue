@@ -109,7 +109,7 @@ export default {
 						width 100%
 						min-height 9rem
 				.item-title
-					line-height 1.4rem
+					line-height 1.8rem
 					margin-top .5rem
 					overflow hidden
 					text-overflow ellipsis

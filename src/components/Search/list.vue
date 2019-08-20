@@ -149,6 +149,7 @@ export default {
 					color gray
 					min-height 1.5rem
 					ellipsis-one()
+					font-size $font-size-small
 					&.NoCopyRight
 						color lightgray
 					.vip
@@ -181,11 +182,11 @@ export default {
 				ellipsis-one()
 				.cover-img
 					border-radius .2rem
-					width 4rem
-					height 4rem
+					width 5rem
+					height 5rem
 				.artist-name
 					font-size $font-size-medium
-					margin-bottom .5rem
+					// margin-bottom .5rem
 					ellipsis-one()
 					min-height 1.5rem
 					margin-left 1rem
@@ -209,6 +210,7 @@ export default {
 					flex-direction column
 					padding-left 1rem
 					ellipsis()
+					font-size $font-size-small
 					.playlist-name
 						font-size $font-size-medium
 						margin-bottom .5rem

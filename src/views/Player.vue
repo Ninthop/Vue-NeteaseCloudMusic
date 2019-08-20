@@ -469,6 +469,7 @@ export default {
 						display flex
 						flex-direction row
 						color #95afc0
+						font-size $font-size-small
 						span.song-ar
 							&:after
 								content '/'
@@ -536,8 +537,8 @@ export default {
 				margin-top 5%
 				span 
 					svg
-						height 4rem
-						width 4rem
+						height 5rem
+						width 5rem
 			.time-wrapper
 				position relative
 				z-index 100
@@ -562,7 +563,7 @@ export default {
 			left 0
 			right 0
 			bottom 0
-			height 7%
+			height 8%
 			width 100%
 			background-color white
 			border-top .1rem solid lightgray
@@ -593,6 +594,7 @@ export default {
 						max-width 100rem
 				.mini-ar
 					color gray
+					font-size $font-size-small
 					span.song-ar
 						&:after
 							content '/'
@@ -616,10 +618,10 @@ export default {
 				top 50%
 				transform translateY(-50%)
 				.play
-					margin-right .8rem
-					height 2.5rem
-					width 2.5rem
+					margin-right 2rem
+					height 3rem
+					width 3rem
 				.list
-					height 2.5rem
-					width 2.5rem
+					height 3rem
+					width 3rem
 </style>

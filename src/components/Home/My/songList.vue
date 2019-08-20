@@ -50,11 +50,11 @@ export default {
 		.song-list
 			font-size $font-size-normal
 			display flex
-			margin 1rem
+			margin 1.5rem 1rem
 			.cover-img
 				border-radius .2rem
-				width 4rem
-				height 4rem
+				width 5rem
+				height 5rem
 			.list-title
 				display flex
 				flex-direction column

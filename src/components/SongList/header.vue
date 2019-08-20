@@ -92,7 +92,7 @@ export default {
 			position fixed
 			// background-color #ff4757
 			width 100%
-			height 3rem
+			height 4rem
 			color white
 			z-index 100
 			.login-back

@@ -158,6 +158,7 @@ export default {
 								display flex
 								flex-direction row
 								color gray
+								font-size $font-size-small
 								span.ar
 									min-height 1.2rem
 									&:after

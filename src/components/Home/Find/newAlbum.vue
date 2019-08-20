@@ -99,7 +99,7 @@ export default {
 					width 100%
 					border-radius .4rem
 				.item-title
-					line-height 1.4rem
+					line-height 1.5rem
 					margin-top .5rem
 					letter-spacing .02rem
 					overflow hidden
@@ -109,6 +109,7 @@ export default {
 					-webkit-box-orient vertical
 					font-size $font-size-normal
 				.author
+					margin-top .3rem
 					font-size $font-size-small
 					line-height 1.4rem
 					color gray

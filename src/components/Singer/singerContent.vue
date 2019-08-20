@@ -114,6 +114,7 @@
 					display flex
 					flex-direction row
 					color gray
+					font-size $font-size-small
 					span.ar
 						&:after
 							content '/'

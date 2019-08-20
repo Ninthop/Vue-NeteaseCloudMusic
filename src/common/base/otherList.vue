@@ -71,7 +71,7 @@ export default {
 			position fixed
 			// background-color #ff4757
 			width 100%
-			height 3rem
+			height 4rem
 			color black
 			border-bottom .1rem solid lightgray
 			background-color white
@@ -90,7 +90,7 @@ export default {
 				left 50%
 				transform translateX(-50%) translateY(-50%)
 		.content
-			margin-top 4rem
+			margin-top 5rem
 			.song
 				display flex
 				flex-direction row
@@ -120,6 +120,7 @@ export default {
 						display flex
 						flex-direction row
 						color gray
+						font-size $font-size-small
 						span.ar
 							&:after
 								content '/'
