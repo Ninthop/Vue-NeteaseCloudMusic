@@ -1,9 +1,9 @@
 # vue-neteasecloudmusic
 
-##预览
+## 预览
 [码云预览地址](http://ninthop.gitee.io/vue-neteasecloudmusic)
 
-##预览图
+## 预览图
 ![预览](./src/assets/static/预览.png)
 
 ## 已完成
@@ -22,7 +22,7 @@
 - Stylus
 - element-ui　　loading功能
 
-##目录
+## 目录
 
 ```
 ├── src
