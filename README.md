@@ -1,4 +1,5 @@
 # vue-neteasecloudmusic
+[码云预览地址](http://ninthop.gitee.io/vue-neteasecloudmusic)
 ## 已完成
 - 发现页
 - 用户页，登录功能
@@ -15,8 +16,14 @@
 - Stylus
 - element-ui　　loading功能
 
-## 接口
-感谢[网易云音乐Api](https://binaryify.github.io/NeteaseCloudMusicApi)　　//需在本地运行，暂未部署到服务器
+## 插件
+- [fastClick](https://github.com/ftlabs/fastclick)
+- [better-scroll](https://github.com/ustbhuangyi/better-scroll)
+- [VueAwesomeSwiper](https://github.com/surmon-china/vue-awesome-swiper)
+- [lyric-parse](https://github.com/ustbhuangyi/lyric-parser)
+
+## 接口服务
+[网易云音乐Api](https://binaryify.github.io/NeteaseCloudMusicApi)
 
 ## Project setup
 ```

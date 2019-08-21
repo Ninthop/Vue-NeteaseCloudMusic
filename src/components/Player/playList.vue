@@ -114,7 +114,7 @@ export default {
 			border-top-left-radius 1.5rem
 			border-top-right-radius 1.5rem
 			.content-head
-				padding 1rem 1rem 0 1rem
+				padding 1rem 1rem 1.5rem 1rem
 				display flex
 				.play-all
 					font-size $font-size-medium
@@ -151,14 +151,16 @@ export default {
 							ellipsis-one()
 							.song-title
 								font-size $font-size-medium
-								margin-bottom .5rem
 								ellipsis-one()
-								min-height 1.5rem
+								margin-bottom .2rem
+								line-height 1.8rem
+								min-height 1.8rem
 							.author-and-cover
 								display flex
 								flex-direction row
 								color gray
 								font-size $font-size-small
+								min-height 1.8rem								
 								span.ar
 									min-height 1.2rem
 									&:after

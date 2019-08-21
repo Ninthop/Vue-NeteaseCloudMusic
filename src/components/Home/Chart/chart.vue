@@ -31,8 +31,9 @@ export default {
 				display block
 			.img-wrapper
 				margin-top 1rem	
+				width 30%
 				// border .1rem solid red
 				.img-content
-					width 9rem
+					width 100%
 				
 </style>

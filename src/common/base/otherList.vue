@@ -115,12 +115,13 @@ export default {
 						font-size $font-size-medium
 						margin-bottom .5rem
 						ellipsis-one()
-						min-height 1.5rem
+						min-height 1.8rem
 					.author-and-cover
 						display flex
 						flex-direction row
 						color gray
 						font-size $font-size-small
+						min-height 1.8rem
 						span.ar
 							&:after
 								content '/'

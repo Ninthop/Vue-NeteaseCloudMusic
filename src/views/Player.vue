@@ -36,8 +36,8 @@
 					</div>
 				</fade>
 				<fade>
-					<div class="lyric-wrapper">
-						<scroll class="lyric-content" :data="currentLyricLines" ref="lyriclist">
+					<div class="lyric-wrapper" @click="changeShow" v-show="!this.show">
+						<div class="lyric-content" ref="lyriclist">
 							<div>
 								<p v-if="this.currentLyric == null" class="text-none" ref="lyricLine">没有歌词。</p>
 								<p ref="lyricLine"
@@ -47,7 +47,7 @@
 								v-for="(line,index) in currentLyricLines"
 								:key="index">{{line.txt}}</p>
 							</div>
-						</scroll>
+						</div>
 					</div>
 				</fade>
 			</div>
@@ -146,7 +146,7 @@ import { playMode } from '_com/config/playMode'
 import { shuffle } from '@/lib/util.js'
 import Lyric from 'lyric-parser'
 import Fade from '../common/animate/fade'
-import Scroll from '../common/animate/scroll'
+import Bscroll from 'better-scroll'
 import { getLyric } from '@/api/Song/song'
 
 
@@ -165,7 +165,6 @@ export default {
 	components: {
 		ProgressBar,
 		Fade,
-		Scroll,
 		PlayList
 	},
 	methods: {
@@ -345,9 +344,9 @@ export default {
 			this.currentLineNum = lineNum
 			if (lineNum > 4) {
 				let curLine = this.$refs.lyricLine[lineNum - 4]
-				this.$refs.lyriclist.scrollToElement(curLine, 1000)
+				this.scrollToElement(curLine, 1000)
 			}else {
-				this.$refs.lyriclist.scrollTo(0, 0, 1000)
+				this.scrollTo(0, 0, 1000)
 			}
 			this.playingLyric = txt
 		},
@@ -357,7 +356,19 @@ export default {
 		},
 		playlistShow () {
 			this.$store.commit('setplaylistIsShown', true)
+		},
+		refresh() {
+			this.scroll && this.scroll.refresh()
+		},
+		scrollTo() {
+			this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
+		},
+		scrollToElement() {
+			this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
 		}
+	},
+	mounted () {
+		this.scroll = new Bscroll(this.$refs.lyriclist, {click: true})
 	},
 	computed: {
 		...mapGetters([
@@ -412,6 +423,11 @@ export default {
 				// console.log(this.$store.state.recentPlay)
 				this.$store.commit('addRecentPlay', newSong)
 			})
+		},
+		show () {
+			setTimeout(() => {
+				this.refresh()
+			}, 20)
 		}
 	}
 }
@@ -463,6 +479,7 @@ export default {
 						margin-bottom .5rem
 						ellipsis-one()
 						max-width 20rem
+						min-height 2rem
 						@media all and (min-width 768px)
 							max-width 100rem
 					.all-ar

@@ -142,12 +142,12 @@ export default {
 					font-size $font-size-medium
 					margin-bottom .5rem
 					ellipsis-one()
-					min-height 1.5rem
+					min-height 1.8rem
 				.author-and-cover
 					display flex
 					flex-direction row
 					color gray
-					min-height 1.5rem
+					min-height 1.8rem
 					ellipsis-one()
 					font-size $font-size-small
 					&.NoCopyRight
@@ -188,7 +188,7 @@ export default {
 					font-size $font-size-medium
 					// margin-bottom .5rem
 					ellipsis-one()
-					min-height 1.5rem
+					min-height 1.8rem
 					margin-left 1rem
 		.playlist
 			display flex
@@ -215,11 +215,11 @@ export default {
 						font-size $font-size-medium
 						margin-bottom .5rem
 						ellipsis()
-						min-height 1.5rem
+						min-height 1.8rem
 					.playlist-ar
 						display flex
 						flex-direction row
-						min-height 1.5rem
+						min-height 1.8rem
 						.ar
 							margin-left .5rem
 </style>

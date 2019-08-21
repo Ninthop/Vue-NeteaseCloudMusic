@@ -48,6 +48,7 @@ export default {
 				margin-top 1rem
 			.banner-image
 				width 70%
+				height 100%
 				box-shadow 1rem -1rem rgba(255, 107, 129,1.0)
 				@media all and (max-width 768px)
 					width 90%
