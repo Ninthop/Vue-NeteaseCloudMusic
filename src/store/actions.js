@@ -117,9 +117,9 @@ const actions = {
 		})
 		.then(res => {
 			// console.log (res)
-			commit('setSequenceList', song)
+			commit('addSequenceList', res.songs[0])
 			// commit('setPlaylist', [])
-			commit('addPlaylist', res.songs[0])
+			commit('setPlaylist', rootState.sequenceList)
 			commit('setCurrentIndex', rootState.playlist.length - 1)
 			commit('setFullScreen', true)
 			commit('setPlayingStatus', true)

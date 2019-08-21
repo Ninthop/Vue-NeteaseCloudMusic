@@ -30,6 +30,7 @@ const mutations = {
 		state.playlist.push(song)
 	},
 	addSequenceList (state, song) {
+		console.log('add')
 		state.sequenceList.push(song)
 	},
 	setSequenceList (state, list) {

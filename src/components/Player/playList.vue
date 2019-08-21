@@ -48,6 +48,7 @@ export default {
 	name: 'PlayList',
 	methods: {
 		listenMusic (song, index) {
+				console.log(this.sequenceList)
 				this.$store.dispatch('playMusic', {song, index})
 				this.$store.commit('setplaylistIsShown', false)
 				// console.log(song)

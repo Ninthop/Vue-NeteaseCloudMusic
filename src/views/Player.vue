@@ -288,15 +288,22 @@ export default {
 		// 播放模式设置
 		setMode () {
 			const mode = (this.mode + 1) % 3
+			// console.log(mode)
 			this.$store.commit('setMode', mode)
-			let songlist = null
+			let cursonglist = null
+			// console.log('顺序')
 			if (mode == playMode.random) {
-				songlist = shuffle(this.sequenceList)
+				// console.log(this.sequenceList)
+				cursonglist = shuffle(this.sequenceList)
+				// console.log(this.sequenceList)
 			}else {
-				songlist = this.sequenceList
+				// console.log(this.sequenceList)
+				cursonglist = this.sequenceList
+				// console.log(this.sequenceList)
 			}
-			this.$store.commit('setPlaylist', songlist)
-			this.formatCurrentIndex(songlist)
+			this.$store.commit('setPlaylist', cursonglist)
+			this.formatCurrentIndex(cursonglist)
+			// console.log(this.sequenceList)
 		},
 		// 更改播放模式时，定住当前序号
 		formatCurrentIndex (list) {
