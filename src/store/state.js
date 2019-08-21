@@ -24,7 +24,10 @@ const state = {
 	searchResult: {},
 	searchType: 1,
 	resultShow: false,
-	keyWords: ''
+	keyWords: '',
+
+	//主页按钮
+	everydaySong: []
 }
 
 export default state

@@ -42,6 +42,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import Bscroll from 'better-scroll'
+import {playMode} from '_com/config/playMode'
 
 export default {
 	name: 'PlayList',
@@ -62,7 +63,9 @@ export default {
 	computed: {
 		...mapGetters([
 			'playlist',
-			'playlistIsShown'
+			'playlistIsShown',
+			'mode',
+			'sequenceList'
 		])
 	},
 	mounted(){

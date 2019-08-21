@@ -11,6 +11,7 @@
 			<span class="login-text">请输入密码：</span><input type="password" class="pwd" v-model="loginForm.password">
 		</div>
 		<button class="confirm" @click="login">登陆</button>
+		<p>注：请输入网易云音乐账号</p>
 	</div>
 </template>
 
@@ -86,7 +87,7 @@ export default {
 		div
 			.login-text
 				display inline-block
-				width 9rem
+				min-width 9rem
 				font-size $font-size-normal
 			input
 				margin-top 2rem

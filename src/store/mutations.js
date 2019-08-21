@@ -29,6 +29,9 @@ const mutations = {
 	addPlaylist (state, song) {
 		state.playlist.push(song)
 	},
+	addSequenceList (state, song) {
+		state.sequenceList.push(song)
+	},
 	setSequenceList (state, list) {
 		state.sequenceList = list
 	},
@@ -68,6 +71,9 @@ const mutations = {
 	addRecentPlay(state, song) {
 		state.recentPlay.unshift(song)
 		// console.log(state.recentPlay)
+	},
+	setEverydaySong(state, list) {
+		state.everydaySong = list
 	}
 }
 

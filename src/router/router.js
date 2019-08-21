@@ -54,6 +54,17 @@ export default[
 		component: () => import('../views/RecentSong.vue')
 	},
 	{
+		path: '/everydaysong',
+		name: 'everydaysong',
+		meta: {logined: true},
+		component: () => import('../views/EverydayRec.vue')
+	},
+	{
+		path: '/newsong',
+		name: 'newsong',
+		component: () => import('../views/NewSong.vue')
+	},
+	{
 		path: '/test',
 		name: 'test',
 		component: () => import('../views/test.vue')

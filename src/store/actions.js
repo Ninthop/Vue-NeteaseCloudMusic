@@ -2,6 +2,7 @@ import { getUserInfo } from '@/api/User/user.js'
 import { getSongDetail } from '@/api/Song/song.js'
 import { getAlbumSong } from '@/api/Home/find.js'
 import { getHotSearchS, getSearchResult } from '@/api/Search/search'
+import { getEverydaySong } from '@/api/Home/find.js'
 import { playMode } from '_com/config/playMode'
 import axios from 'axios'
 
@@ -115,7 +116,8 @@ const actions = {
 			ids: song.id
 		})
 		.then(res => {
-			commit('setSequenceList', res.songs)
+			// console.log (res)
+			commit('setSequenceList', song)
 			// commit('setPlaylist', [])
 			commit('addPlaylist', res.songs[0])
 			commit('setCurrentIndex', rootState.playlist.length - 1)
@@ -125,6 +127,14 @@ const actions = {
 			// console.log(999)
 		})
 	},
+
+	getEverydaySong({commit}) {
+		getEverydaySong()
+		.then(res => {
+			// console.log(res.recommend)
+			commit('setEverydaySong', res.recommend)
+		})
+	}
 }
 
 export default actions

@@ -47,11 +47,29 @@ const getAlbumSong = data => {
 	})
 }
 
+const getEverydaySong = data => {
+	return request({
+		url: '/recommend/songs',
+		method: 'get',
+		params: data
+	})
+}
+
+const getNewSong = data => {
+	return request({
+		url: '/top/song',
+		method: 'get',
+		params: data
+	})
+}
+
 export {
 	getBanner,
 	getRecList,
 	getAlbum,
 	getLoginRec,
 	refreshLogin,
-	getAlbumSong
+	getAlbumSong,
+	getEverydaySong,
+	getNewSong
 }

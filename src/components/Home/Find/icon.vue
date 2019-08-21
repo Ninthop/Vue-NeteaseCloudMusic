@@ -1,29 +1,23 @@
 <template>
 	<div class="find-icon">
-		<span class="everyday-rec">
+		<router-link to="/everydaysong" tag="span" class="everyday-rec">
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-bianjigedanxinxi"></use>
 			</svg>
 			<div class="icon-text">每日推荐</div>
-		</span>
+		</router-link>
 		<span class="private-fM">
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-xiangsituijian"></use>
 			</svg>
 			<div class="icon-text">私人FM</div>
 		</span>
-		<span class="song-list">
-			<svg class="icon" aria-hidden="true">
-				<use xlink:href="#icon-SanMiAppiconfill-copy-copy"></use>
-			</svg>
-			<div class="icon-text">歌单</div>
-		</span>
-		<span class="radios">
+		<router-link to="/newsong" tag="span"  class="radios">
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-zhuanji"></use>
 			</svg>
-			<div class="icon-text">电台</div>
-		</span>
+			<div class="icon-text">新歌速递</div>
+		</router-link>
 	</div>
 </template>
 
