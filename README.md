@@ -1,6 +1,11 @@
 # vue-neteasecloudmusic
+
+##预览
 [码云预览地址](http://ninthop.gitee.io/vue-neteasecloudmusic)
+
+##预览图
 ![预览](./src/assets/static/预览.png)
+
 ## 已完成
 - 发现页
 - 用户页，登录功能
