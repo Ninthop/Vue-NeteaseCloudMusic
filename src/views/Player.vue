@@ -288,27 +288,29 @@ export default {
 		// 播放模式设置
 		setMode () {
 			const mode = (this.mode + 1) % 3
-			// console.log(mode)
 			this.$store.commit('setMode', mode)
 			let cursonglist = null
-			// console.log('顺序')
+			// 发现直接调用shuffle会导致sequenceList被污染，原因未知，于是先用arr取出sequenceList的内容
+			let arr = [...this.sequenceList]
+			// console.log(this.sequenceList)
+			// console.log(cursonglist)
 			if (mode == playMode.random) {
+				// console.log(cursonglist)
 				// console.log(this.sequenceList)
-				cursonglist = shuffle(this.sequenceList)
+				cursonglist = shuffle(arr)
 				// console.log(this.sequenceList)
 			}else {
 				// console.log(this.sequenceList)
 				cursonglist = this.sequenceList
 				// console.log(this.sequenceList)
 			}
-			this.$store.commit('setPlaylist', cursonglist)
 			this.formatCurrentIndex(cursonglist)
-			// console.log(this.sequenceList)
+			this.$store.commit('setPlaylist', cursonglist)
 		},
 		// 更改播放模式时，定住当前序号
 		formatCurrentIndex (list) {
 			let index = list.findIndex(item => {
-				return item.id === this.currentSong.id
+				return item.id == this.currentSong.id
 			})
 			this.$store.commit('setCurrentIndex', index)
 		},
