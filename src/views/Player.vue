@@ -1,130 +1,135 @@
 <template>
 	<div class="player" v-show="playlist.length > 0" @touchmove.prevent>
-		<div class="full-player" v-show="fullScreen">
-			<!-- 背景遮罩，模糊处理 -->
-			<div class="bgimg-fa" v-if="currentSong.al">
-				<div class="bgimg" 
-					:style="{  
-						background: `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8)), url('${formatBigPic(currentSong.al.picUrl || currentSong.artist.img1v1Url)}') no-repeat center center`, 
-						filter: 'blur(1rem)'
-					}"
-				>
+		<transition name="fullScreen">
+			<div class="full-player" v-show="fullScreen">
+				<!-- 背景遮罩，模糊处理 -->
+				<div class="bgimg-fa" v-if="currentSong.al">
+					<div class="bgimg" 
+						:style="{  
+							background: `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8)), url('${formatBigPic(currentSong.al.picUrl || currentSong.artist.img1v1Url)}') no-repeat center center`, 
+							filter: 'blur(1rem)'
+						}"
+					>
+					</div>
 				</div>
-			</div>
-			<!-- 头部信息 -->
-			<span class="header">
-				<img src="@/assets/static/back.png" alt="返回图标" class="back" @click="routerBack">
-				<span class="play-title" v-if="currentSong.al">
-					<span class="song-name">{{ currentSong.name }}</span>
-					<div class="all-ar">
-						<span class="song-ar" v-for="author of currentSong.ar" :key="author.id">
-							{{ author.name }}
-						</span>
-					</div>
+				<!-- 头部信息 -->
+				<span class="header">
+					<img src="@/assets/static/back.png" alt="返回图标" class="back" @click="routerBack">
+					<span class="play-title" v-if="currentSong.al">
+						<span class="song-name">{{ currentSong.name }}</span>
+						<div class="all-ar">
+							<span class="song-ar" v-for="(author, index) of currentSong.ar" :key="index">
+								{{ author.name }}
+							</span>
+						</div>
+					</span>
+					<span class="share">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-fenxiang"></use>
+						</svg>
+					</span>
 				</span>
-				<span class="share">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-fenxiang"></use>
-					</svg>
-				</span>
-			</span>
-			<!-- 中间cd部分和歌词部分切换 -->
-			<div class="middle">
-				<fade>
-					<div class="player-cover" v-show="this.show" v-if="currentSong.al" @click="changeShow">
-						<img :src="currentSong.al.picUrl | formatPic" alt="" class="cover-img">
-					</div>
-				</fade>
-				<fade>
-					<div class="lyric-wrapper" @click="changeShow" v-show="!this.show">
-						<div class="lyric-content" ref="lyriclist">
-							<div>
-								<p v-if="this.currentLyric == null" class="text-none" ref="lyricLine">没有歌词。</p>
-								<p ref="lyricLine"
-								class="text"
-								v-else
-								:class="{'current': currentLineNum == index}"
-								v-for="(line,index) in currentLyricLines"
-								:key="index">{{line.txt}}</p>
+				<!-- 中间cd部分和歌词部分切换 -->
+				<div class="middle">
+					<fade>
+						<div class="player-cover" v-show="this.show" v-if="currentSong.al" @click="changeShow">
+							<img :src="currentSong.al.picUrl | formatPic" alt="" class="cover-img">
+						</div>
+					</fade>
+					<fade>
+						<div class="lyric-wrapper" @click="changeShow" v-show="!this.show">
+							<div class="lyric-content" ref="lyriclist">
+								<div>
+									<p v-if="this.currentLyric == null" class="text-none" ref="lyricLine">没有歌词。</p>
+									<p ref="lyricLine"
+									class="text"
+									v-else
+									:class="{'current': currentLineNum == index}"
+									v-for="(line,index) in currentLyricLines"
+									:key="index">{{line.txt}}</p>
+								</div>
 							</div>
 						</div>
-					</div>
-				</fade>
-			</div>
-			<!-- 时间轴 -->
-			<div class="time-wrapper">
-				<span class="time time-start">{{ formatTime(currentTime) }}</span>
-				<div class="progress-bar-wrapper">
-					<progress-bar :percent="percent" @setPercent="setPer" />
+					</fade>
 				</div>
-				<span class="time time-end">{{ formatAlltime(currentSong.dt) }}</span>
+				<!-- 时间轴 -->
+				<div class="time-wrapper">
+					<span class="time time-start">{{ formatTime(currentTime) }}</span>
+					<div class="progress-bar-wrapper">
+						<progress-bar :percent="percent" @setPercent="setPer" />
+					</div>
+					<span class="time time-end">{{ formatAlltime(currentSong.dt) }}</span>
+				</div>
+
+				<div class="player-bottom">
+					<span class="collect">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-shoucangdaogedan"></use>
+						</svg>
+					</span>
+
+					<span class="pre-song" @click="preSong">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-xiayishoubofang-copy"></use>
+						</svg>
+					</span>
+
+					<span class="play-status" @click="playingSong">
+						<svg class="icon" aria-hidden="true">
+							<use :xlink:href="playIcon"></use>
+						</svg>
+					</span>	
+				
+					<span class="next-song" @click="nextSong">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#icon-xiayishoubofang"></use>
+						</svg>
+					</span>
+
+					<span class="play-mode" @click="setMode">
+						<svg class="icon" aria-hidden="true">
+							<use :xlink:href="modeIcon"></use>
+						</svg>
+					</span>
+				</div>
 			</div>
-
-			<div class="player-bottom">
-				<span class="collect">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-shoucangdaogedan"></use>
-					</svg>
-				</span>
-
-				<span class="pre-song" @click="preSong">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-xiayishoubofang-copy"></use>
-					</svg>
-				</span>
-
-				<span class="play-status" @click="playingSong">
-					<svg class="icon" aria-hidden="true">
-						<use :xlink:href="playIcon"></use>
-					</svg>
-				</span>	
-			
-				<span class="next-song" @click="nextSong">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-xiayishoubofang"></use>
-					</svg>
-				</span>
-
-				<span class="play-mode" @click="setMode">
-					<svg class="icon" aria-hidden="true">
-						<use :xlink:href="modeIcon"></use>
-					</svg>
-				</span>
-			</div>
-		</div>
+		</transition>
 		<!-- 缩小后的播放器 -->
-		<div class="mini-player" v-show="!fullScreen" @click="openFullScreen">
-			<div class="mini-cover" v-if="currentSong.al">
-				<img :src="currentSong.al.picUrl | formatPic" alt="" class="mini-cover-img">
-			</div>
-			<div class="playing-lyric mini-info" v-if="this.currentLyric == null && this.playing">
-				<span class="mini-title">{{ currentSong.name }}</span>
-				<span class="mini-ar">
-					<span class="song-ar" v-for="author of currentSong.ar" :key="author.id">
-						{{ author.name }}
+		<transition name="miniPlayer">
+			<div class="mini-player" v-show="!fullScreen" @click="openFullScreen" ref="mini">
+				<div class="mini-cover" v-if="currentSong.al">
+					<img :src="currentSong.al.picUrl | formatPic" alt="" class="mini-cover-img">
+				</div>
+				<div class="playing-lyric mini-info" v-if="this.currentLyric == null && this.playing">
+					<span class="mini-title">{{ currentSong.name }}</span>
+					<span class="mini-ar">
+						<span class="song-ar" v-for="(author,index) of currentSong.ar" :key="index">
+							{{ author.name }}
+						</span>
 					</span>
-				</span>
-			</div>
-			<div class="playing-lyric mini-info" v-else-if="this.playing">
-				<p>{{ this.playingLyric }}</p>
-			</div>
-			<div class="mini-info" v-else>
-				<span class="mini-title">{{ currentSong.name }}</span>
-				<span class="mini-ar">
-					<span class="song-ar" v-for="author of currentSong.ar" :key="author.id">
-						{{ author.name }}
+				</div>
+				<div class="playing-lyric mini-info" v-else-if="this.playing">
+					<p>{{ this.playingLyric }}</p>
+				</div>
+				<div class="mini-info" v-else>
+					<span class="mini-title">{{ currentSong.name }}</span>
+					<span class="mini-ar">
+						<span class="song-ar" v-for="(author,index) of currentSong.ar" :key="index">
+							{{ author.name }}
+						</span>
 					</span>
-				</span>
+				</div>
+				<div class="mini-play">
+					<svg class="icon play" aria-hidden="true" @click.stop="playingSong">
+						<use :xlink:href="miniPlayIcon"></use>
+					</svg>
+					<svg class="icon list" aria-hidden="true" @click.stop="playlistShow">
+						<use xlink:href="#icon-bianjigedanxinxi"></use>
+					</svg>
+				</div>
 			</div>
-			<div class="mini-play">
-				<svg class="icon play" aria-hidden="true" @click.stop="playingSong">
-					<use :xlink:href="miniPlayIcon"></use>
-				</svg>
-				<svg class="icon list" aria-hidden="true" @click.stop="playlistShow">
-					<use xlink:href="#icon-bianjigedanxinxi"></use>
-				</svg>
-			</div>
-		</div>
+		</transition>
+
 		<play-list />
 		<audio 
 			ref="audio" 
@@ -234,7 +239,7 @@ export default {
 			if (this.mode == playMode.loop) {
 				this.loop()
 			}else {
-				this.nextSong()				
+				this.nextSong()
 			}
 		},
 		// 单曲循环
@@ -454,6 +459,18 @@ export default {
 			left 0
 			right 0
 			// background-color gray
+			&.fullScreen-enter-active, &.fullScreen-leave-active
+				transition all 0.4s
+				.header, .player-bottom, .player-cover
+					transition all 0.4s cubic-bezier(.29,.31,.34,1.11)
+			&.fullScreen-enter, &.fullScreen-leave-to
+				opacity 0
+				.header
+					transform translate3d(0, -10rem, 0)
+				.player-bottom
+					transform translate3d(0, 10rem, 0)
+				.player-cover
+					transform scale(2)
 			.bgimg-fa
 				position absolute
 				top 0
@@ -482,6 +499,7 @@ export default {
 					flex-direction column
 					color white
 					margin-top 1rem
+					max-width 20rem
 					.song-name
 						font-size $font-size-medium
 						font-weight 400
@@ -496,6 +514,8 @@ export default {
 						flex-direction row
 						color #95afc0
 						font-size $font-size-small
+						ellipsis-one()
+						max-width 20rem
 						span.song-ar
 							&:after
 								content '/'
@@ -521,8 +541,8 @@ export default {
 					height 100%
 					// border .1rem solid red
 					.cover-img
-						height 18rem
-						width 18rem
+						height 65%
+						// width 80%
 						border-radius 50%
 						border .5rem solid rgba(149, 175, 192, .5)
 						box-shadow 0 0 3rem .2rem lightgray
@@ -595,6 +615,11 @@ export default {
 			border-top .1rem solid lightgray
 			display flex
 			flex-direction row
+			&.miniPlayer-enter-active, &.miniPlayer-leave-active
+				transition all 0.4s
+			&.miniPlayer-enter, &.miniPlayer-leave-to
+				transform translateY(100%)
+				opacity 0
 			.mini-cover
 				height 100%
 				display flex

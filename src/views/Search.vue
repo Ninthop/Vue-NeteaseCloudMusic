@@ -10,7 +10,8 @@
 					placeholder="请输入关键词..." 
 					@focus="adviceAppear" 
 					v-model="keyWords"
-					@blur="adviceDisappear">
+					@blur="adviceDisappear"
+					@keyup.enter="postKeywords">
 				<fade>
 					<div class="search-advice" v-show="this.keyWords && show">
 						<span class="default-search" v-if="!this.searchAdvice.keyword" @click="adviceClick(keyWords)">搜索“{{ keyWords }}”</span>
@@ -65,6 +66,7 @@ export default {
 				// this.$store.commit('setSearchType', 1)
 				this.$store.dispatch('getSearchResultType', this.keyWords)
 				this.$store.commit('setResultShow', true)
+				this.adviceDisappear()
 			}
 		},
 		changeKey (hotKeywords) {

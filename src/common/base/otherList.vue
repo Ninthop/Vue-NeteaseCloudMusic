@@ -53,7 +53,8 @@ export default {
 			this.$router.go(-1);
 		},
 		listenMusic (song, index) {
-			if (song[index].st) {
+			// console.log(song[index])
+			if (song[index].st == 0) {
 				if (song[index].st == 0 && song[index].fee != 1 && song[index].fee != 4 && song[index].fee != 16) {
 					this.$emit('listen', song[index])
 					// console.log(song)
@@ -66,6 +67,7 @@ export default {
 					// console.log(song[index])
 				}
 			}else {
+				console.log(song[index])
 				if (song[index].status == 0 && song[index].fee != 1 && song[index].fee != 4 && song[index].fee != 16) {
 					this.$emit('listen', song[index])
 					// console.log(song)

@@ -24,7 +24,9 @@ export default {
 				clickable: true
 			},
 			loop: true,
-			autoplay: true
+			autoplay: true,
+			observer:true,
+			observeParents:true,
         }
       }
 	}

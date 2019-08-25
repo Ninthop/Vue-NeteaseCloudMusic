@@ -1,19 +1,23 @@
 <template>
   <div id="app">
-	  <keep-alive exclude="user, login">
-    	<router-view/>
-	  </keep-alive>
-	  <music-player />
+	  	<router-change>
+			<keep-alive exclude="user, login">
+				<router-view/>
+			</keep-alive>
+	  	</router-change>
+	  	<music-player />
   </div>
 </template>
 
 <script>
 import MusicPlayer from './views/Player'
+import routerChange from '_com//animate/routerChange'
 
 export default {
 	name: 'app',
 	components: {
-		MusicPlayer
+		MusicPlayer,
+		routerChange
 	}
 }
 </script>

@@ -8,7 +8,7 @@
 			<span class="login-text">请输入手机号：</span><input type="text" class="user" v-model="loginForm.phone">
 		</div>
 		<div>
-			<span class="login-text">请输入密码：</span><input type="password" class="pwd" v-model="loginForm.password">
+			<span class="login-text">请输入密码：</span><input @keyup.enter="login" type="password" class="pwd" v-model="loginForm.password">
 		</div>
 		<button class="confirm" @click="login">登陆</button>
 		<p>注：请输入网易云音乐账号</p>

@@ -1,41 +1,43 @@
 <template>
-	<div class="play-list" v-show="this.playlistIsShown" @touchmove.prevent>
-		<div class="mask"></div>
-		<div class="playlist-body" @click.stop>
-			<div class="content-head">
-				<svg class="icon" aria-hidden="true">
-					<use xlink:href="#icon-yinzhi"></use>
-				</svg>
-				<div class="play-all" @click.stop="playAllSong(playlist)">
-					播放全部
-					<span class="song-num">(共{{ playlist.length }}首)</span>
+	<div class="play-list" @touchmove.prevent>
+		<div class="mask" v-show="this.playlistIsShown" ></div>
+		<transform>
+			<div class="playlist-body" @click.stop v-show="this.playlistIsShown" >
+				<div class="content-head">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-yinzhi"></use>
+					</svg>
+					<div class="play-all" @click.stop="playAllSong(playlist)">
+						播放全部
+						<span class="song-num">(共{{ playlist.length }}首)</span>
+					</div>
 				</div>
-			</div>
-			<div class="playlist-wrapper" ref="playlistScroll">
-				<div class="playlist-content">
-					<div 
-						class="song" 
-						v-for="(item, index) of playlist" 
-						:key="index"
-						@click.stop="listenMusic(playlist, index)">
-						<div class="index">{{ index+1 }}</div>
-						<div class="song-body">
-							<span class="song-title">
-								{{ item.name }}
-								<span class="rtUrl" v-if="item.rtUrl">{{ item.rtUrls }}</span>
-							</span>
-							<span class="author-and-cover">
-								<span class="ar" v-for="(author,index) of item.ar" :key="index">
-									{{ author.name }}
+				<div class="playlist-wrapper" ref="playlistScroll">
+					<div class="playlist-content">
+						<div 
+							class="song" 
+							v-for="(item, index) of playlist" 
+							:key="index"
+							@click.stop="listenMusic(playlist, index)">
+							<div class="index">{{ index+1 }}</div>
+							<div class="song-body">
+								<span class="song-title">
+									{{ item.name }}
+									<span class="rtUrl" v-if="item.rtUrl">{{ item.rtUrls }}</span>
 								</span>
-								<span class="separator">-</span>
-								<span class="cover">{{ item.al.name }}</span>
-							</span>
+								<span class="author-and-cover">
+									<span class="ar" v-for="(author,index) of item.ar" :key="index">
+										{{ author.name }}
+									</span>
+									<span class="separator">-</span>
+									<span class="cover">{{ item.al.name }}</span>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</transform>
 	</div>
 </template>
 
@@ -43,9 +45,13 @@
 import { mapGetters } from 'vuex'
 import Bscroll from 'better-scroll'
 import {playMode} from '_com/config/playMode'
+import Transform from '_com/animate/transform'
 
 export default {
 	name: 'PlayList',
+	components: {
+		Transform	
+	},
 	methods: {
 		listenMusic (song, index) {
 				console.log(this.sequenceList)
