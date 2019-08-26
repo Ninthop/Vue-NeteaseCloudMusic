@@ -44,12 +44,11 @@
 		},
 		methods: {
 			listenMusic (song, index) {
+				console.log(song[index])
 				if (song[index].st == 0 && song[index].fee != 1 && song[index].fee != 4 && song[index].fee != 16) {
 					this.$emit('listen', {song, index})
 					// console.log(song)
-				}else if (res.privileges[0].st == 0 &&　(res.privileges[0].fee == 1 || res.privileges[0].fee == 16) && res.privileges[0].payed == 1) {
-					this.$emit('listen', song)
-				}else if (res.privileges[0].st == 0 &&　(res.privileges[0].fee == 1 || res.privileges[0].fee == 16) && res.privileges[0].payed == 0) {
+				}else if (song[index].st == 0 &&　(song[index].fee == 1 || song[index].fee == 16)) {
 					alert('需要Vip')
 				}else if (song[index].fee == 4) {
 					alert('需要购买专辑')
