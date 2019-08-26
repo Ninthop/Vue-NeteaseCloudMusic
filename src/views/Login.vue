@@ -11,7 +11,7 @@
 			<span class="login-text">请输入密码：</span><input @keyup.enter="login" type="password" class="pwd" v-model="loginForm.password">
 		</div>
 		<button class="confirm" @click="login">登陆</button>
-		<p>注：请输入网易云音乐账号</p>
+		<p class="tips">注：请输入网易云音乐账号</p>
 	</div>
 </template>
 
@@ -109,5 +109,7 @@ export default {
 				background-color #ff4757
 				color white
 				box-shadow -.3rem -.3rem red
+		.tips
+			font-size $font-size-normal
 
 </style>

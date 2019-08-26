@@ -36,9 +36,9 @@ export default {
 	.slide-right-enter, .slide-left-leave-active
 		opacity 0
 		transform translateX(-100%)
-		transform rotate(-20deg)
+		transform rotate(-30deg)
 	.slide-left-enter, .slide-right-leave-active
 		opacity 0
 		transform translateX(100%)
-		transform rotate(20deg)
+		transform rotate(30deg)
 </style>

@@ -43,10 +43,11 @@ export default {
 			display flex
 			flex-wrap wrap
 			margin 0 1rem
-			font-size $font-size-medium
+			font-size $font-size-normal
 			span
 				border .1rem solid lightgray 
+				border-radius .4rem
 				margin .5rem
-				padding .5rem
+				padding .7rem
 				color gray
 </style>

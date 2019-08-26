@@ -21,7 +21,7 @@
 - Axios
 - Vuex
 - Stylus
-- element-ui　　loading功能
+- element-ui
 
 ## 目录
 
@@ -38,7 +38,7 @@
 │   │   ├──Singer           　　　// 歌单页组件
 │   │   ├──homeHeader.vue   　　　// 主页头部
 │   │   ├──homeTab.vue   　　　   // 主页tab
-│   ├── lib                      // axios、http封装及公用方法
+│   ├── lib                      // axios封装及公用方法
 │   ├── router                   // 路由
 │   ├── store                    // 状态管理
 │   ├── views
@@ -54,7 +54,7 @@
 │   │   ├── User               　 // 用户页
 │   ├── App.vue
 │   └── main.js
-├── babel.config.js              // 按需引入组件的配置
+├── babel.config.js              // 按需引入组件配置
 ├── .editorconfig　　　　　　　　　// 格式
 ├── package.json                 // 项目依赖
 └── vue.config.js                // vue-cli 3.0配置
@@ -83,5 +83,3 @@ npm run serve
 ```
 npm run build
 ```
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
