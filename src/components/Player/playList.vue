@@ -18,6 +18,7 @@
 							class="song" 
 							v-for="(item, index) of playlist" 
 							:key="index"
+							:class="{'current': currentIndex == index}"
 							@click.stop="listenMusic(playlist, index)">
 							<div class="index">{{ index+1 }}</div>
 							<div class="song-body">
@@ -72,7 +73,8 @@ export default {
 			'playlist',
 			'playlistIsShown',
 			'mode',
-			'sequenceList'
+			'sequenceList',
+			'currentIndex'
 		])
 	},
 	mounted(){
@@ -143,6 +145,9 @@ export default {
 						display flex
 						flex-direction row
 						margin 2rem 0
+						&.current
+							background-color rgba(255, 71, 87, .3)
+							box-shadow 0 0 .5rem rgba(255, 71, 87, .3)
 						.index
 							height 3rem
 							width 3rem
