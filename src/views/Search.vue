@@ -118,13 +118,17 @@ export default {
 	@import ('~_s/varibles.styl')
 	.search
 		position relative
+		display flex
+		justify-content center
 		width 100%
 		.search-head
-			position relative
+			position absolute
+			z-index 100
 			display flex
 			flex-direction row
 			align-items center
-			margin .5rem 1rem
+			padding .5rem 1rem
+			width 90%
 			.back
 				.search-back
 					width 3rem
@@ -178,6 +182,9 @@ export default {
 						background-color $color-theme
 		.hot-search
 			position absolute
+			padding-top 10%
 		.result
+			width 100%
+			padding-top 10%
 			position relative
 </style>
