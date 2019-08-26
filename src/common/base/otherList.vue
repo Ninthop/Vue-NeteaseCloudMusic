@@ -58,7 +58,9 @@ export default {
 				if (song[index].st == 0 && song[index].fee != 1 && song[index].fee != 4 && song[index].fee != 16) {
 					this.$emit('listen', song[index])
 					// console.log(song)
-				}else if (song[index].st == 0 &&　(song[index].fee == 1 || song[index].fee == 16)) {
+				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 1) {
+					this.$emit('listen', song[index])
+				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 0) {
 					alert('需要Vip')
 				}else if (song[index].fee == 4) {
 					alert('需要购买专辑')
@@ -67,11 +69,13 @@ export default {
 					// console.log(song[index])
 				}
 			}else {
-				console.log(song[index])
+				// console.log(song[index])
 				if (song[index].status == 0 && song[index].fee != 1 && song[index].fee != 4 && song[index].fee != 16) {
 					this.$emit('listen', song[index])
 					// console.log(song)
-				}else if (song[index].status == 0 &&　(song[index].fee == 1 || song[index].fee == 16)) {
+				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 1) {
+					this.$emit('listen', song[index])
+				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 0) {
 					alert('需要Vip')
 				}else if (song[index].fee == 4) {
 					alert('需要购买专辑')

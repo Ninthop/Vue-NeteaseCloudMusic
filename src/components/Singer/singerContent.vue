@@ -13,7 +13,7 @@
 		<div 
 			class="song" 
 			v-for="(item, index) of playList" 
-			:key="item.id"
+			:key="index"
 			@click="listenMusic(playList, index)"
 		>
 			<div class="index">{{ index+1 }}</div>
@@ -47,13 +47,17 @@
 				if (song[index].privilege.st == 0 && song[index].privilege.fee != 1 && song[index].privilege.fee != 4 && song[index].privilege.fee != 16) {
 					this.$emit('listen', {song, index})
 					// console.log(song)
-				}else if (song[index].st == 0 &&　(song[index].fee == 1 || song[index].fee == 16)) {
+				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 1) {
+					this.$emit('listen', {song, index})
+				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 0) {
+				// }else if (song[index].st == 0 &&　(song[index].fee == 1 || song[index].fee == 16)) {
 					alert('需要Vip')
+					// console.log(song[index])
 				}else if (song[index].fee == 4) {
 					alert('需要购买专辑')
 				}else {
 					alert('没有版权')
-					console.log(song[index])
+					// console.log(song[index])
 				}
 			},
 			playAllSong (allSong) {

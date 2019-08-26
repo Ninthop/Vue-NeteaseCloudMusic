@@ -83,18 +83,20 @@ export default {
 				if (res.privileges[0].st == 0 && res.privileges[0].fee != 1 && res.privileges[0].fee != 4 && res.privileges[0].fee != 16) {
 					this.$emit('listen', song)
 					// console.log(res.privileges[0])
-					// console.log(song)
-				}else if (res.privileges[0].st == 0 &&　(res.privileges[0].fee == 1 || res.privileges[0].fee == 16)) {
+					// console.log(res)
+				}else if (res.privileges[0].st == 0 &&　(res.privileges[0].fee == 1 || res.privileges[0].fee == 16) && res.privileges[0].payed == 1) {
+					this.$emit('listen', song)
+				}else if (res.privileges[0].st == 0 &&　(res.privileges[0].fee == 1 || res.privileges[0].fee == 16) && res.privileges[0].payed == 0) {
 					alert('需要Vip')
 					// console.log(res.privileges[0])
-					// console.log(song)
+					// console.log(res)
 				}else if (res.privileges[0].fee == 4) {
 					alert('需要购买专辑')
 				}
 				else {
 					alert('没有版权')
 					// console.log(res.privileges[0])
-					// console.log(song)
+					// console.log(res)
 				}
 			})
 		}
