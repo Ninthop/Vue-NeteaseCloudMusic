@@ -18,6 +18,7 @@
 <script>
 // import * as loginApi from '@/api/Home/my.js'
 import axios from 'axios'
+import qs from 'qs'
 
 export default {
 	name: 'Login',
@@ -37,10 +38,12 @@ export default {
 			if (this.loginForm.phone === '' || this.loginForm.password === '') {
         		alert('账号或密码不能为空');
 			}else {
-				axios.get('http://47.102.127.79:80/login/cellphone',{
-					params: this.loginForm,
-					withCredentials: true
-				})
+				axios.post('http://47.102.127.79:80/login/cellphone',
+					qs.stringify(this.loginForm),
+					{
+						withCredentials: true
+					}
+				)
 				.then(res => {
 					// console.log(res.response)
 					// console.log(res)
