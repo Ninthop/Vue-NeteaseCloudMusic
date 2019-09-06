@@ -655,11 +655,11 @@ export default {
 								content none
 			.playing-lyric
 				p
-					line-height 1.3rem
+					line-height 1.4rem
 					max-width 18rem
 					font-size $font-size-normal
 					// min-height 1.2rem
-					min-height 1.4rem
+					min-height 1.6rem
 					ellipsis-one()
 					@media all and (min-width 768px)
 						max-width 100rem

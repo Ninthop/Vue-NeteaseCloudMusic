@@ -26,7 +26,8 @@ export default {
 		return {
 			loginForm: {
 				phone: '',
-				password: ''
+				password: '',
+				timestamp: (new Date()).getTime()
 			}
 		}
 	},

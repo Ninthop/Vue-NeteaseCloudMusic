@@ -14,7 +14,6 @@ import FindRec from './Find/recommand.vue'
 import FindAlbum from './Find/newAlbum.vue'
 import * as apiFind from '@/api/Home/find.js'
 
-var time = new Date()
 
 export default {
 	name: 'HomeFind',
@@ -38,7 +37,7 @@ export default {
 			if (bool == 1) {
 				console.log('已登陆')
 				apiFind.getLoginRec ({
-					timestamp: time.getTime()
+					timestamp: new Date().getTime()
 				})
 				.then(res => {
 					this.recList = res.recommend

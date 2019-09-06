@@ -46,15 +46,35 @@ export default {
 	//切换推荐歌单数据
 	methods: {
 		changeNum () {
-			if (this.startNum < 1 + 5*2){
-				this.startNum += 5
-				this.endNum += 5
-				// console.log(this.startNum)
-				return
+			// if (this.startNum < 1 + 5*2){
+			// 	this.startNum += 5
+			// 	this.endNum += 5
+			// 	// console.log(this.startNum)
+			// 	return
+			// }
+			// this.startNum = 1
+			// this.endNum = 6
+			// console.log(this.sixRecList)
+			var offset = (this.recList.length - 1) % 5
+			console.log(offset)
+			if (offset == 0) {
+				offset = 5
+				if (this.endNum <= this.recList.length - 1) {
+					this.startNum += offset
+					this.endNum += offset
+					console.log(this.startNum + ' ' + this.endNum)
+					return
+				}
+			}else {
+				if (this.endNum <= this.recList.length - 1) {
+					this.startNum += offset
+					this.endNum += offset
+					console.log(this.startNum + ' ' + this.endNum)
+					return
+				}
 			}
 			this.startNum = 1
 			this.endNum = 6
-			// console.log(this.sixRecList)
 		}
 	}
 }
