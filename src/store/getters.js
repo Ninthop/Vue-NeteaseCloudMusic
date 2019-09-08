@@ -1,4 +1,5 @@
 const getters = {
+	loginType: state => state.loginType,
 	playing: state => state.playing,
 	fullScreen: state => state.fullScreen,
 	playlist: state => state.playlist,

@@ -13,6 +13,7 @@ import FindIcon from './Find/icon.vue'
 import FindRec from './Find/recommand.vue'
 import FindAlbum from './Find/newAlbum.vue'
 import * as apiFind from '@/api/Home/find.js'
+import { mapGetters } from 'vuex';
 
 
 export default {
@@ -30,9 +31,14 @@ export default {
 		FindAlbum,
 		FindRec
 	},
+	computed: {
+		...mapGetters([
+			'loginType'
+		])
+	},
 	methods: {
 		getRec () {
-			let bool = this.$store.state.loginType
+			let bool = this.loginType
 			// console.log(bool)
 			if (bool == 1) {
 				console.log('已登陆')
@@ -55,6 +61,11 @@ export default {
 			}
 		}
 	},
+	watch: {
+		loginType () {
+			this.getRec()
+		}
+	},
 	mounted () {
 		apiFind.getBanner ({
 			type: 1
@@ -67,11 +78,12 @@ export default {
 		apiFind.getAlbum ()
 		.then(res => {
 			this.albumList = res.albums
-		})
-	},
-	activated () {
+		}),
 		this.getRec()
 	}
+	// activated () {
+	// 	this.getRec()
+	// }
 }
 </script>
 

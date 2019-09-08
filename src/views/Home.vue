@@ -3,7 +3,7 @@
 		<home-header />
 		<router-change>
 			<keep-alive>
-					<router-view />
+				<router-view />
 			</keep-alive>
 		</router-change>
 	</div>

@@ -629,17 +629,21 @@ export default {
 					height 80%
 					border-radius 50%
 			.mini-info
+				position absolute
+				left 15%
+				top 50%
+				transform translateY(-50%)
 				display flex
 				flex-direction column
 				justify-content center
 				// border .1rem solid red
-				margin-left 1rem
+				// margin-left 1rem
 				// padding-top .2rem
 				.mini-title
 					font-size $font-size-normal
 					margin-bottom .2rem
 					ellipsis-one()
-					max-width 18rem
+					max-width 15rem
 					min-height 1.2rem
 					@media all and (min-width 768px)
 						max-width 100rem
