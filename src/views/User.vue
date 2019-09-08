@@ -6,6 +6,12 @@
 		<div class="user-level info">Lv.{{ userInfo.level }}</div>
 		<div class="user-signature info">{{ userInfo.profile.signature }}</div>
 		<button class="logout" @click="logout">退出登陆</button>
+		<div class="github">
+			<svg class="icon" aria-hidden="true">
+				<use xlink:href="#icon-github"></use>
+			</svg>
+			<a href="https://github.com/Ninthop/Vue-NeteaseCloudMusic" class="github-name">Ninthop</a>
+		</div>
 	</div>
 </template>
 
@@ -81,4 +87,38 @@ export default {
 		.user-signature
 			padding-top 3rem
 			font-size $font-size-medium
+		.github
+			display	flex 
+			flex-direction row
+			justify-content center
+			align-items center
+			position absolute
+			bottom 15%
+			.icon
+				width 3rem
+				margin-right .5rem
+			.github-name
+				position relative
+				font-size $font-size-medium
+				text-decoration none
+				&:before
+					content ''
+					position absolute
+					width 0
+					left 50%
+					bottom -.3rem
+					height .2rem
+					background-color rgba(41, 128, 185, .5)
+				&:hover:before
+					width 100%
+					left 0
+					transition all 0.5s
+				&:link
+					color #606266
+				&:visited
+					color #606266
+				&:hover
+					color #3498db
+				&:active
+					color #606266
 </style>

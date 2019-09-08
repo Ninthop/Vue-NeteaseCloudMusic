@@ -12,6 +12,12 @@
 		</div>
 		<button class="confirm" @click="login">登陆</button>
 		<p class="tips">注：请输入网易云音乐账号</p>
+		<div class="github">
+			<svg class="icon" aria-hidden="true">
+				<use xlink:href="#icon-github"></use>
+			</svg>
+			<a href="https://github.com/Ninthop/Vue-NeteaseCloudMusic" class="github-name">Ninthop</a>
+		</div>
 	</div>
 </template>
 
@@ -74,6 +80,7 @@ export default {
 
 <style lang="stylus" scoped>
 	@import ('~_s/varibles.styl')
+	@import ('~_s/mixin.styl')
 	.login
 		height 90vh
 		display flex
@@ -115,5 +122,39 @@ export default {
 				box-shadow -.3rem -.3rem red
 		.tips
 			font-size $font-size-normal
+		.github
+			display	flex 
+			flex-direction row
+			justify-content center
+			align-items center
+			position absolute
+			bottom 15%
+			.icon
+				width 3rem
+				margin-right .5rem
+			.github-name
+				position relative
+				font-size $font-size-medium
+				text-decoration none
+				&:before
+					content ''
+					position absolute
+					width 0
+					left 50%
+					bottom -.3rem
+					height .2rem
+					background-color rgba(41, 128, 185, .5)
+				&:hover:before
+					width 100%
+					left 0
+					transition all 0.5s
+				&:link
+					color #606266
+				&:visited
+					color #606266
+				&:hover
+					color #3498db
+				&:active
+					color #606266
 
 </style>
