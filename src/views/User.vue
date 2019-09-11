@@ -60,7 +60,7 @@ export default {
 <style lang="stylus" scoped>
 	@import ('~_s/varibles.styl')
 	.user
-		height 90vh
+		height 100vh
 		display flex
 		flex-direction column
 		justify-content center
@@ -92,8 +92,7 @@ export default {
 			flex-direction row
 			justify-content center
 			align-items center
-			position absolute
-			bottom 15%
+			padding-top 5rem
 			.icon
 				width 3rem
 				margin-right .5rem

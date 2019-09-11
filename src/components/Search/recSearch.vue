@@ -36,6 +36,8 @@ export default {
 <style lang="stylus" scoped>
 	@import ('~_s/varibles.styl')
 	.recommand-search
+		position absolute
+		left 0
 		.title
 			margin 1rem
 			font-size $font-size-medium

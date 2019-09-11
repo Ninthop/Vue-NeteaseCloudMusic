@@ -82,7 +82,7 @@ export default {
 	@import ('~_s/varibles.styl')
 	@import ('~_s/mixin.styl')
 	.login
-		height 90vh
+		height 100vh
 		display flex
 		flex-direction column
 		justify-content center
@@ -98,7 +98,7 @@ export default {
 		div
 			.login-text
 				display inline-block
-				min-width 9rem
+				min-width 10rem
 				font-size $font-size-normal
 			input
 				margin-top 2rem
@@ -127,8 +127,6 @@ export default {
 			flex-direction row
 			justify-content center
 			align-items center
-			position absolute
-			bottom 15%
 			.icon
 				width 3rem
 				margin-right .5rem

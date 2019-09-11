@@ -181,7 +181,6 @@ export default {
 					&:active
 						background-color $color-theme
 		.hot-search
-			position absolute
 			padding-top 10%
 		.result
 			width 100%
