@@ -14,12 +14,14 @@
 				<img src="@/assets/static/back.png" alt="返回图标" class="login-back" @click="routerBack">
 				<div class="fixed-text">{{ playList.name }}</div>
 			</div>
-			<div class="header-pic">
-				<img :src="playList.coverImgUrl" alt="歌单封面" class="pic">
-				<div class="info">
-					<img :src="playList.creator.avatarUrl" alt="用户头像" class="user-avatar">
-					<div class="info-nickname">
-						{{ playList.creator.nickname }}
+			<div class="fixed">
+				<div class="header-pic">
+					<img :src="playList.coverImgUrl" alt="歌单封面" class="pic">
+					<div class="info">
+						<img :src="playList.creator.avatarUrl" alt="用户头像" class="user-avatar">
+						<div class="info-nickname">
+							{{ playList.creator.nickname }}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -75,7 +77,7 @@ export default {
 		border-bottom .1rem solid red
 		display flex
 		.bgimg-fa
-			position absolute
+			position fixed
 			top 0
 			height 20rem
 			width 100%
@@ -109,33 +111,38 @@ export default {
 				top 50%
 				left 50%
 				transform translateX(-50%) translateY(-50%)
-		.header-pic
-			// padding-top 3rem
-			position relative
-			z-index 1
+		.fixed
+			position fixed
+			height 20rem
+			width 100%
 			display flex
-			flex-direction row
-			align-items center
-			.pic
+			.header-pic
+				// padding-top 3rem
 				position relative
-				left 2rem
-				border-radius .5rem
-				height 10rem
-				width 10rem
-			.info
-				color white
-				position relative
-				left 25%
-				font-size $font-size-medium
+				// z-index 1
 				display flex
-				flex-direction column
-				.info-nickname
-					ellipsis-one()
-					max-width 15rem
-				.user-avatar
-					height 4rem
-					width 4rem
-					border-radius 50%
-					border .2rem solid #fff
-					margin-bottom 1rem
+				flex-direction row
+				align-items center
+				.pic
+					position relative
+					left 2rem
+					border-radius .5rem
+					height 10rem
+					width 10rem
+				.info
+					color white
+					position relative
+					left 25%
+					font-size $font-size-medium
+					display flex
+					flex-direction column
+					.info-nickname
+						ellipsis-one()
+						max-width 15rem
+					.user-avatar
+						height 4rem
+						width 4rem
+						border-radius 50%
+						border .2rem solid #fff
+						margin-bottom 1rem
 </style>

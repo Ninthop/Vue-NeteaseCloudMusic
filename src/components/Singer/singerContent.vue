@@ -72,7 +72,7 @@
 	@import ('~_s/mixin.styl')
 	.singer-content
 		position absolute
-		top 30%
+		top 40%
 		background-color white
 		width 100%
 		border-top-left-radius 1.5rem

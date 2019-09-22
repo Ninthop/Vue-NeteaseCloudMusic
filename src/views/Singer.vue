@@ -1,7 +1,7 @@
 <template>
 	<div class="singer">
 		<div class="header">
-			<img src="@/assets/static/back.png" alt="返回图标" class="login-back" @click="routerBack">
+			<img src="@/assets/static/back.png" alt="返回图标" class="login-back" :style="bg" @click="routerBack">
 			<img :src="this.singerPic" alt="歌手头像" class="singer-img">
 		</div>
 
@@ -20,7 +20,11 @@ export default {
 	data () {
 		return {
 			singerPic: '',
-			playList: []
+			playList: [],
+			bg: {
+				boxShadow: '0 0 1rem .1rem rgba(178, 190, 195, 1.0)',
+				backgroundColor: 'rgba(178, 190, 195, 1.0)'
+            }
 		}
 	},
 	components: {
@@ -35,7 +39,24 @@ export default {
 		},
 		playAll (allSong) {
 			this.$store.dispatch('playAllMusic', allSong)
-		}
+		},
+		handleScroll () {
+			const top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
+            if (top <= 0){
+                this.bg = { backgroundColor: 'rgba(178, 190, 195, 0', boxShadow: '0 0 1rem .1rem rgba(178, 190, 195, 0)'}
+            }else if(top > 0 && top < 180) {
+				const opacitynum = top / 180
+				this.bg = { backgroundColor: `rgba(178, 190, 195, ${opacitynum})`, boxShadow: `0 0 1rem .1rem rgba(178, 190, 195, ${opacitynum})`}
+            }else{
+				this.bg = { backgroundColor: 'rgba(178, 190, 195, 1)', boxShadow: '0 0 1rem .1rem rgba(178, 190, 195, 1)'}
+			}
+        }
+	},
+	mounted () {
+		window.addEventListener('scroll', this.handleScroll)
+    },
+    destroyed () {
+        window.removeEventListener('scroll', this.handleScroll)
 	},
 	activated() {
 		// console.log(this.$route.params.id)
@@ -57,9 +78,13 @@ export default {
 		.header
 			.login-back
 				width 3rem
-				position absolute
+				position fixed
 				top 1%
 				left 2%
+				border-radius 50%
+				z-index 100
+				padding .5rem
 			.singer-img
+				position fixed
 				width 100%
 </style>

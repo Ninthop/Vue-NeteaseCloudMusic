@@ -6,7 +6,7 @@
 				<div class="bgimg-fa" v-if="currentSong.al">
 					<div class="bgimg" 
 						:style="{  
-							background: `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8)), url('${formatBigPic(currentSong.al.picUrl || currentSong.artist.img1v1Url)}') no-repeat center center`, 
+							background: `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .4), rgba(0, 0, 0, .8)), url('${formatPic(currentSong.al.picUrl || currentSong.artist.img1v1Url)}') no-repeat center center`, 
 							filter: 'blur(1rem)'
 						}"
 					>
@@ -33,7 +33,7 @@
 				<div class="middle">
 					<fade>
 						<div class="player-cover" v-show="this.show" v-if="currentSong.al" @click="changeShow">
-							<img :src="currentSong.al.picUrl | formatPic" alt="" class="cover-img">
+							<img :src="formatBigPic(currentSong.al.picUrl)" alt="" class="cover-img">
 						</div>
 					</fade>
 					<fade>
@@ -275,9 +275,13 @@ export default {
 			return num
 		},
 		// 图片压缩
-		formatBigPic(url) {
+		formatPic(url) {
 			if (!url) return ''
 			return `${url}?param=200y200`
+		},
+		formatBigPic(url) {
+			if (!url) return ''
+			return `${url}?param=600y600`
 		},
 		// 时间轴百分比设置
 		setPer (per) {
