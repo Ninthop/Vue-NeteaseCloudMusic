@@ -6,7 +6,7 @@
 		</div>
 
 		<div class="singer-body">
-			<singer-content :playList="playList" @listen="playMusic" @playAll="playAll"/>
+			<singer-content :playList="playList" @playAll="playAll"/>
 		</div>
 	</div>
 </template>
@@ -34,9 +34,6 @@ export default {
 		routerBack () {
             this.$router.go(-1)
         },
-		playMusic ({song, index}) {
-			this.$store.dispatch('playMusic', {song, index})
-		},
 		playAll (allSong) {
 			this.$store.dispatch('playAllMusic', allSong)
 		},

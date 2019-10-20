@@ -1,6 +1,6 @@
 <template>
 	<div class="recent">
-		<recent-list :title="title" :playList="recentPlay" :songNum="recentPlay.length" @listen="playMusic"/>
+		<recent-list :title="title" :playList="recentPlay" />
 	</div>
 </template>
 
@@ -13,7 +13,6 @@ export default {
 	data () {
 		return {
 			title: '最近听过',
-			
 		}
 	},
 	components: {
@@ -23,11 +22,6 @@ export default {
 		...mapGetters([
 			'recentPlay'
 		])
-	},
-	methods: {
-		playMusic (song) {
-			this.$store.dispatch('playSingleMusic', song)
-		}
 	}
 }
 </script>

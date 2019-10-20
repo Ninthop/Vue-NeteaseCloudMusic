@@ -1,16 +1,24 @@
 import { Loading } from 'element-ui'
+import store from '../store/index'
 
 let loading
 const startLoading = () => {
-    loading = Loading.service({
-        lock: true,
-        text: '加载中……',
-        background: 'rgba(0, 0, 0, 0.7)'
-    })
+	// store.state.loadIsShown = 1
+	console.log(store.state.loadIsShown)
+	if (store.state.loadIsShown == 1) {
+		loading = Loading.service({
+			lock: true,
+			text: '加载中……',
+			background: 'rgba(0, 0, 0, 0.7)'
+		})
+	}
 }
 
 const endLoading = () => {
-    loading.close()
+	if (store.state.loadIsShown == 1) {
+		store.commit('toggleLoad', 1)
+		loading.close()
+	}
 }
 
 function Random (min, max) {

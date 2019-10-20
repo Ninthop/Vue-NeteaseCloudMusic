@@ -386,6 +386,7 @@ export default {
 		}
 	},
 	mounted () {
+		this.$store.commit('toggleLoad', 0)
 		this.scroll = new Bscroll(this.$refs.lyriclist, {click: true})
 	},
 	computed: {

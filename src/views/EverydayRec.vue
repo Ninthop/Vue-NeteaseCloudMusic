@@ -1,6 +1,6 @@
 <template>
 	<div class="EverydayRecList">
-		<recent-list :title="title" :playList="everydaySong" :songNum="everydaySong.length" @listen="playMusic"/>
+		<recent-list :title="title" :playList="everydaySong" />
 	</div>
 </template>
 
@@ -18,17 +18,13 @@ export default {
 	components: {
 		RecentList
 	},
-	methods: {
-		playMusic (song) {
-			this.$store.dispatch('playSingleMusic', song)
-		}
-	},
 	computed: {
 		...mapGetters([
 			'everydaySong'
 		])
 	},
 	mounted () {
+		console.log(1)
 		this.$store.dispatch('getEverydaySong')
 	}
 }

@@ -75,6 +75,9 @@ const mutations = {
 	},
 	setEverydaySong(state, list) {
 		state.everydaySong = list
+	},
+	toggleLoad(state, number) {
+		state.loadIsShown = number
 	}
 }
 

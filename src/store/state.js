@@ -27,7 +27,10 @@ const state = {
 	keyWords: '',
 
 	//主页按钮
-	everydaySong: []
+	everydaySong: [],
+
+	//控制loading
+	loadIsShown: 1
 }
 
 export default state

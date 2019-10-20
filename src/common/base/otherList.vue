@@ -10,80 +10,42 @@
 				class="song" 
 				v-for="(item, index) of playList" 
 				:key="index"
-				@click="listenMusic(playList, index)"
 			>
-				<div class="index">{{ index+1 }}</div>
-				<div class="song-body">
-					<span class="song-title">
-						{{ item.name }}
-						<span class="rtUrl" v-if="item.rtUrl">{{ item.rtUrls }}</span>
-					</span>
-					<!-- 我也不知道为什么网易的数据混来混去 -->
-					<span class="author-and-cover" v-if="item.ar">
-						<span class="ar" v-for="(author,index) of item.ar" :key="index">
-							{{ author.name }}
-						</span>
-						<span class="separator">-</span>
-						<span class="cover">{{ item.al.name }}</span>
-					</span>
-					<!-- 这里是每日推荐的数据 -->
-					<span class="author-and-cover" v-if="item.artists">
-						<span class="ar" v-for="(author,index) of item.artists" :key="index">
-							{{ author.name }}
-						</span>
-						<span class="separator">-</span>
-						<span class="cover">{{ item.album.name }}</span>
-					</span>
-				</div>
+				<song 
+					:songDetial="item" 
+					:songRtUrl="item.rtUrls" 
+					:index="index" 
+					:artists="item.artists || item.ar" 
+					:album="item.album || item.al" />
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import Song from '_com/base/song'
+
 export default {
 	name: 'OtherList',
 	props: {
-		playList: Array,
-		songNum:  Number,
-		title: String
+		playList: {
+			type: Array
+		},
+		title: {
+			type: String
+		}
+	},
+	components: {
+		Song
 	},
 	methods: {
 		routerBack () {
 			this.$router.go(-1);
 		},
-		listenMusic (song, index) {
-			// console.log(song[index])
-			if (song[index].st == 0) {
-				if (song[index].st == 0 && song[index].fee != 1 && song[index].fee != 4 && song[index].fee != 16) {
-					this.$emit('listen', song[index])
-					// console.log(song)
-				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 1) {
-					this.$emit('listen', song[index])
-				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 0) {
-					alert('需要Vip')
-				}else if (song[index].fee == 4) {
-					alert('需要购买专辑')
-				}else {
-					alert('没有版权')
-					// console.log(song[index])
-				}
-			}else {
-				// console.log(song[index])
-				if (song[index].status == 0 && song[index].fee != 1 && song[index].fee != 4 && song[index].fee != 16) {
-					this.$emit('listen', song[index])
-					// console.log(song)
-				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 1) {
-					this.$emit('listen', song[index])
-				}else if (song[index].privilege.st == 0 &&　(song[index].privilege.fee == 1 || song[index].privilege.fee == 16) && song[index].privilege.payed == 0) {
-					alert('需要Vip')
-				}else if (song[index].fee == 4) {
-					alert('需要购买专辑')
-				}else {
-					alert('没有版权')
-					// console.log(song[index])
-				}
-			}
+		playAllSong (allSong) {
+			this.$store.dispatch('playAllMusic', allSong)
+			// this.$emit('playAll', allSong)
+			// console.log(allSong)
 		}
 	}
 }
@@ -98,7 +60,8 @@ export default {
 		width 100%
 		.title
 			position fixed
-			// background-color #ff4757
+			display flex
+			// flex-direction row
 			width 100%
 			height 4rem
 			color black
@@ -124,40 +87,4 @@ export default {
 				display flex
 				flex-direction row
 				margin 2rem 0
-				.index
-					height 3rem
-					width 3rem
-					display flex
-					justify-content center
-					align-items center
-					// border .1rem solid red
-					font-size $font-size-normal
-					color gray
-				.song-body
-					display flex
-					flex-direction column
-					justify-content center
-					width 80%
-					margin-left .5rem
-					ellipsis-one()
-					.song-title
-						font-size $font-size-medium
-						margin-bottom .5rem
-						ellipsis-one()
-						min-height 1.8rem
-					.author-and-cover
-						display flex
-						flex-direction row
-						color gray
-						font-size $font-size-small
-						min-height 1.8rem
-						span.ar
-							&:after
-								content '/'
-								margin-right .3rem
-							&:nth-last-child(3)
-								&:after
-									content ''
-						.cover
-							ellipsis-one()
 </style>

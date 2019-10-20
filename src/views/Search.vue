@@ -28,7 +28,7 @@
 		<rec-search @setKey="changeKey" class="hot-search"/>
 		<div class="result" v-if="this.resultShow">
 			<list-tab />
-			<list @listen="playMusic" />
+			<list />
 		</div>
 	</div>
 </template>
@@ -78,10 +78,6 @@ export default {
 		},
 		adviceDisappear () {
 			this.show = false
-		},
-		playMusic (song) {
-			this.$store.dispatch('playSingleMusic', song)
-			// console.log(song)
 		},
 		adviceClick (keyword) {
 			this.$store.commit('setKeyWords', keyword)
