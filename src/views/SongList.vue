@@ -26,10 +26,10 @@ export default {
 			this.$store.dispatch('playAllMusic', allSong)
 		}
 	},
-	deactivated() {
+	beforeDestroy() {
 		this.$store.commit('toggleLoad', 1)
 	},
-	activated() {
+	created() {
 		// console.log(this.$route.params.id)
 		this.$store.commit('toggleLoad', 0)
 		getSonglist({

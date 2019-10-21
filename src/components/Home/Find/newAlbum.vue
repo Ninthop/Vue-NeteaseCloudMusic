@@ -39,8 +39,12 @@ export default {
 	},
 	methods: {
 		play (song) {
-			// console.log(song)
-			this.$store.dispatch('getAlbumSong', song.id)
+			if (song.status == 0) {
+				this.$store.dispatch('getAlbumSong', song.id)
+			} else {
+				alert('需要购买或者vip')
+			}
+			console.log(song)
 		},
 		changeNum () {
 			if (this.startNum < 6){

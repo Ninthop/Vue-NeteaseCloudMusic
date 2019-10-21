@@ -430,7 +430,7 @@ export default {
 				this.$refs.audio.play()
 				this.getCurrentLyric()
 				this.$store.commit('setPlayingStatus', true)
-			}, 200)
+			}, 500)
 		},
 		// 监听当前歌曲变化，获取新歌的url
 		currentSong (newSong) {

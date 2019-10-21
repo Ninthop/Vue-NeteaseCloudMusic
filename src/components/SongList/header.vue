@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<div class="list-header" v-if="playList.creator">
+	<!-- <div> -->
+		<div class="list-header">
 			<div class="bgimg-fa">
 				<div class="bgimg" 
 					:style="{  
@@ -16,8 +16,8 @@
 			</div>
 			<div class="fixed">
 				<div class="header-pic">
-					<img :src="playList.coverImgUrl" alt="歌单封面" class="pic">
-					<div class="info">
+					<img :src="playList.coverImgUrl" alt="" class="pic">
+					<div class="info" v-if="playList.creator">
 						<img :src="playList.creator.avatarUrl" alt="用户头像" class="user-avatar">
 						<div class="info-nickname">
 							{{ playList.creator.nickname }}
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	<!-- </div> -->
 </template>
 
 <script>
@@ -72,16 +72,18 @@ export default {
     @import ('~_s/varibles.styl')
     @import ('~_s/mixin.styl')
 	.list-header
-		height 20rem
+		min-height 20rem
 		width 100%
-		border-bottom .1rem solid red
+		// border-bottom .1rem solid red
 		display flex
+		background-color gray
 		.bgimg-fa
 			position fixed
 			top 0
-			height 20rem
+			min-height 20rem
 			width 100%
 			overflow hidden
+			background-color gray
 		.bgimg
 			position absolute
 			top 0
@@ -103,6 +105,7 @@ export default {
 				position absolute
 				top 50%
 				left 2%
+				z-index 200
 				transform translateY(-50%)
 			.fixed-text
 				font-size $font-size-medium
@@ -129,6 +132,7 @@ export default {
 					border-radius .5rem
 					height 10rem
 					width 10rem
+					background-color lightgray
 				.info
 					color white
 					position relative
@@ -145,4 +149,5 @@ export default {
 						border-radius 50%
 						border .2rem solid #fff
 						margin-bottom 1rem
+						background-color lightgray
 </style>
