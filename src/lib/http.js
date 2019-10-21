@@ -4,6 +4,9 @@ import { logout } from '@/api/User/user.js'
 import store from '../store/index'
 import router from '../router/'
 
+//本地运行需自行下载 网易云音乐node接口服务
+let baseURL = process.env.NODE_ENV == 'development' ? 'http://localhost:3000' : 'http://47.102.127.79:80';
+
 const error = err => {
 	alert('连接错误，请重新连接或登陆')
 	console.log(err.response.data)
@@ -17,7 +20,7 @@ const error = err => {
 }
 
 const service = axios.create({
-    baseURL: 'http://47.102.127.79:80',
+    baseURL: baseURL,
 	timeout: 1000 * 10,
 	withCredentials: true
 });
