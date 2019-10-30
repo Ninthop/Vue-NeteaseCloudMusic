@@ -42,10 +42,11 @@ export default {
 			this.$router.go(-1);
 		},
 		login () {
+			// let baseURL = process.env.NODE_ENV == 'development' ? 'http://localhost:3000' : 'http://47.102.127.79:80';
 			if (this.loginForm.phone === '' || this.loginForm.password === '') {
         		alert('账号或密码不能为空');
 			}else {
-				axios.post('http://localhost:3000/login/cellphone',
+				axios.post(`${process.env.VUE_APP_BASEURL}/login/cellphone`,
 					qs.stringify(this.loginForm),
 					{
 						withCredentials: true

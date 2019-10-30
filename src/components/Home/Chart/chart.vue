@@ -21,19 +21,21 @@ export default {
 	.chart
 		.all-chart
 			display flex
-			// flex-direction row
 			justify-content space-around
 			flex-wrap wrap
-			&:after
-				content ' '
-				width 30%
-				height 0
-				display block
+			margin-bottom 1rem
+			// &:after
+			// 	content ' '
+			// 	width 30%
+			// 	height 0
+			// 	display block
 			.img-wrapper
 				margin-top 1rem	
-				width 30%
+				width 9rem
 				// border .1rem solid red
 				.img-content
+					border-radius 5px
+					box-shadow 2px 2px 8px 2px lightgray
 					width 100%
 				
 </style>

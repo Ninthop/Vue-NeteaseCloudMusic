@@ -18,9 +18,10 @@ const actions = {
 	},
 
 	getAdvice ({commit}, newWords) {
+		// let baseURL = process.env.NODE_ENV == 'development' ? 'http://localhost:3000' : 'http://47.102.127.79:80';		
 		axios({
 			method: 'get',
-			url:'http://47.102.127.79:80/search/suggest',
+			url:`${process.env.VUE_APP_BASEURL}/search/suggest`,
 			params: {
 				keywords: newWords, 
 				type: 'mobile', 
