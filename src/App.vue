@@ -27,15 +27,8 @@ export default {
 	},
 	computed: {
 		...mapGetters([
-			'fullScreen'
+			'playing'
 		])
-	},
-	watch: {
-		fullScreen () {
-			let view = document.getElementById('view')
-			view.style.paddingBottom = '12%'
-			// console.log(view)
-		}
 	}
 }
 </script>
@@ -43,14 +36,14 @@ export default {
 
 <style lang="stylus">
 	#app
-		// padding-bottom 12%
 		.posiiton-div
 			position absolute
 			top 0
 			bottom 0
 			width 100%
-			margin 0 auto
+			padding-bottom 12%
+			// margin 0 auto
 			overflow-y auto
-			overflow-x hidden
+			// overflow-x hidden
 			// padding-bottom 0
 </style>

@@ -46,9 +46,10 @@ export default {
     methods: {
         routerBack () {
             this.$router.go(-1)
-        },
+		},
+		//父元素设定overflow:auto，需要监控父元素滚动高度
         handleScroll () {
-			const top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
+			const top = this.$parent.$el.scrollTop
             if (top <= 0){
                 this.bg = { backgroundColor: 'rgba(255, 71, 87, 0)'}
             }else if(top > 0 && top < 180) {
@@ -60,7 +61,7 @@ export default {
         }
     },
     mounted () {
-		window.addEventListener('scroll', this.handleScroll)
+		window.addEventListener('scroll', this.handleScroll, true)
     },
     destroyed () {
         window.removeEventListener('scroll', this.handleScroll)

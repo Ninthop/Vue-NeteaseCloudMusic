@@ -19,23 +19,21 @@ export default {
 
 <style lang="stylus" scoped>
 	.chart
+		margin 0 .8rem
 		.all-chart
 			display flex
-			justify-content space-around
+			justify-content space-between
 			flex-wrap wrap
 			margin-bottom 1rem
-			// &:after
-			// 	content ' '
-			// 	width 30%
-			// 	height 0
-			// 	display block
+			&:after
+				content ' '
+				flex 1
 			.img-wrapper
 				margin-top 1rem	
-				width 9rem
+				width 30%
 				// border .1rem solid red
 				.img-content
 					border-radius 5px
 					box-shadow 2px 2px 8px 2px lightgray
 					width 100%
-				
 </style>
