@@ -45,4 +45,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+	.list
+		overflow-y auto
 </style>

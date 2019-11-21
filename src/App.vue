@@ -18,7 +18,7 @@ export default {
 	name: 'app',
 	data () {
 		return {
-			unCache: ['user', 'Login', 'List']
+			unCache: ['user', 'Login', 'List'],
 		}
 	},
 	components: {
@@ -41,7 +41,7 @@ export default {
 			top 0
 			bottom 0
 			width 100%
-			padding-bottom 12%
+			padding-bottom 10%
 			// margin 0 auto
 			overflow-y auto
 			// overflow-x hidden

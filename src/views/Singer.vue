@@ -22,8 +22,8 @@ export default {
 			singerPic: '',
 			playList: [],
 			bg: {
-				boxShadow: '0 0 1rem .1rem rgba(178, 190, 195, 1.0)',
-				backgroundColor: 'rgba(178, 190, 195, 1.0)'
+				boxShadow: '0 0 1rem .1rem rgba(178, 190, 195, 0)',
+				backgroundColor: 'rgba(178, 190, 195, 0)'
             }
 		}
 	},
@@ -38,7 +38,7 @@ export default {
 			this.$store.dispatch('playAllMusic', allSong)
 		},
 		handleScroll () {
-			const top = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
+			const top = this.$el.scrollTop
             if (top <= 0){
                 this.bg = { backgroundColor: 'rgba(178, 190, 195, 0', boxShadow: '0 0 1rem .1rem rgba(178, 190, 195, 0)'}
             }else if(top > 0 && top < 180) {
@@ -50,7 +50,8 @@ export default {
         }
 	},
 	mounted () {
-		window.addEventListener('scroll', this.handleScroll)
+		window.addEventListener('scroll', this.handleScroll, true)
+		console.log(this.$el.scrollTop)
     },
     destroyed () {
         window.removeEventListener('scroll', this.handleScroll)
@@ -72,7 +73,10 @@ export default {
 
 <style lang="stylus" scoped>
 	.singer
+		min-height 20rem
 		.header
+			overflow hidden
+			min-height 20rem
 			.login-back
 				width 3rem
 				position fixed
@@ -81,6 +85,7 @@ export default {
 				border-radius 50%
 				z-index 100
 				padding .5rem
+				overflow hidden
 			.singer-img
 				position fixed
 				width 100%

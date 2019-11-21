@@ -10,7 +10,7 @@
 			</div>
 		</div>
 
-		<div 
+		<!-- <div 
 			class="song" 
 			v-for="(item, index) of playList.tracks" 
 			:key="index"
@@ -21,12 +21,28 @@
 				:index="index" 
 				:artists="item.ar" 
 				:album="item.al" />
-		</div>
+		</div> -->
+
+		<virtual-list :size="40" :remain="20" class="songWrapper">
+			<div 
+				class="song" 
+				v-for="(item, index) of playList.tracks" 
+				:key="index"
+			>
+				<song 
+					:songDetial="item" 
+					:songRtUrl="item.rtUrls" 
+					:index="index" 
+					:artists="item.ar" 
+					:album="item.al" />
+			</div>
+		</virtual-list>
 	</div>
 </template>
 
 <script>
 import Song from '_com/base/song'
+import virtualList from 'vue-virtual-scroll-list'
 
 export default {
 	name: 'SongContent',
@@ -34,7 +50,8 @@ export default {
 		playList: Object
 	},
 	components: {
-		Song
+		Song,
+		virtualList
 	},
 	methods: {
 		playAllSong (allSong) {
@@ -51,7 +68,7 @@ export default {
 		position relative
 		top -1.5rem
 		background-color white
-		width 100%
+		// width 100%
 		border-top-left-radius 1.5rem
 		border-top-right-radius 1.5rem
 		.content-head
@@ -66,8 +83,11 @@ export default {
 					margin-left 1rem
 					color gray
 					font-size $font-size-normal
-		.song
-			display flex
-			flex-direction row
-			margin 2rem 0
+		.songWrapper
+			width 100%
+			background-color white
+			.song
+				display flex
+				flex-direction row
+				margin 2rem 0
 </style>
