@@ -43,6 +43,7 @@ export default {
 	@import ('~_s/varibles.styl')
 	.my-song
 		background-color white
+		padding-bottom 1rem
 		.my-song-title
 			font-size $font-size-medium
 			padding 1rem 1rem 0 1rem

@@ -58,6 +58,7 @@ export default {
 		position absolute
 		background-color white
 		width 100%
+		padding-bottom 11%
 		.title
 			position fixed
 			display flex

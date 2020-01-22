@@ -78,24 +78,24 @@ export default {
 		])
 	},
 	mounted(){
-      	this.scroll = new Bscroll(this.$refs.playlistScroll, {click: true})
+		this.scroll = new Bscroll(this.$refs.playlistScroll, {click: true})
 		var that = this
-        document.addEventListener('click', function(e){
-            that.$store.commit('setplaylistIsShown', false)
-        })
-    },
-    destroyed () {
-        document.removeEventListener('click', function(e){
-            that.$store.commit('setplaylistIsShown', false)              
-        })
+		document.addEventListener('click', function(e){
+			that.$store.commit('setplaylistIsShown', false)
+		})
+	},
+	destroyed () {
+		document.removeEventListener('click', function(e){
+			that.$store.commit('setplaylistIsShown', false)              
+		})
 	},
 	watch: {
-      playlistIsShown () {
-		// console.log('刷新')
-		setTimeout(() => {
-		this.refresh()
-		}, 20)
-	}
+		playlistIsShown () {
+			// console.log('刷新')
+			setTimeout(() => {
+			this.refresh()
+			}, 20)
+		}
 	},
 }
 </script>

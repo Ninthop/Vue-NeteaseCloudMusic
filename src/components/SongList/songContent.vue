@@ -36,7 +36,13 @@
 					:artists="item.ar" 
 					:album="item.al" />
 			</div>
+			<div :style="{
+				width:'100%',
+				height: '5vh'
+			}">
+			</div>
 		</virtual-list>
+		
 	</div>
 </template>
 

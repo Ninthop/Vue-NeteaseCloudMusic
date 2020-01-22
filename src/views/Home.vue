@@ -3,7 +3,7 @@
 		<home-header />
 		<router-change>
 			<keep-alive>
-				<router-view />
+				<router-view class="blank" />
 			</keep-alive>
 		</router-change>
 	</div>
@@ -23,5 +23,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+	.home
+		.blank
+			padding-bottom 12%
 </style>

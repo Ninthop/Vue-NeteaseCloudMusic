@@ -41,7 +41,6 @@ export default {
 			top 0
 			bottom 0
 			width 100%
-			padding-bottom 10%
 			// margin 0 auto
 			overflow-y auto
 			// overflow-x hidden

@@ -23,11 +23,11 @@
 							</span>
 						</div>
 					</span>
-					<span class="share">
+					<router-link to="/comments" tag="span" class="share">
 						<svg class="icon" aria-hidden="true">
-							<use xlink:href="#icon-fenxiang"></use>
+							<use xlink:href="#icon-pinglun-copy"></use>
 						</svg>
-					</span>
+					</router-link>
 				</span>
 				<!-- 中间cd部分和歌词部分切换 -->
 				<div class="middle">
@@ -62,7 +62,7 @@
 				</div>
 
 				<div class="player-bottom">
-					<span class="collect">
+					<span class="collect" @click="collectSong()">
 						<svg class="icon" aria-hidden="true">
 							<use xlink:href="#icon-shoucangdaogedan"></use>
 						</svg>
@@ -131,6 +131,9 @@
 		</transition>
 
 		<play-list />
+		<fade>
+			<collect-song v-show="collect" @close="closeCol"/>
+		</fade>
 		<audio 
 			ref="audio" 
 			@canplay="ready" 
@@ -153,7 +156,7 @@ import Lyric from 'lyric-parser'
 import Fade from '../common/animate/fade'
 import Bscroll from 'better-scroll'
 import { getLyric } from '@/api/Song/song'
-
+import CollectSong from '../components/Player/collectSong'
 
 export default {
 	name: 'Player',
@@ -164,13 +167,15 @@ export default {
 			currentLineNum: 0,
 			currentLyric: null,
 			currentLyricLines: null,
-			playingLyric: ''
+			playingLyric: '',
+			collect: false
 		}
 	},
 	components: {
 		ProgressBar,
 		Fade,
-		PlayList
+		PlayList,
+		CollectSong
 	},
 	methods: {
 		routerBack () {
@@ -383,6 +388,13 @@ export default {
 		},
 		scrollToElement() {
 			this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
+		},
+		//收藏歌曲显示
+		collectSong() {
+			this.collect = true
+		},
+		closeCol(close) {
+			this.collect = close
 		}
 	},
 	mounted () {
@@ -442,6 +454,7 @@ export default {
 				// console.log(this.$store.state.recentPlay)
 				this.$store.commit('addRecentPlay', newSong)
 			})
+			console.log(newSong)
 		},
 		show () {
 			setTimeout(() => {

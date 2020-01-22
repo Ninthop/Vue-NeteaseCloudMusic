@@ -74,6 +74,12 @@ export default[
 		component: () => import('../views/NewSong.vue')
 	},
 	{
+		path: '/comments/:id',
+		name: 'comments',
+		meta: {index: 9},
+		component: () => import('../views/Comments.vue')
+	},
+	{
 		path: '/test',
 		name: 'test',
 		component: () => import('../views/test.vue')

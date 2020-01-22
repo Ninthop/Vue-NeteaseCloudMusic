@@ -1,4 +1,5 @@
 const getters = {
+	uid: state => state.uid,
 	loginType: state => state.loginType,
 	playing: state => state.playing,
 	fullScreen: state => state.fullScreen,
