@@ -9,6 +9,7 @@
 import MyToplist from './My/topList'
 import MySonglist from './My/songList'
 import * as apiMy from '@/api/Home/my.js'
+import { mapGetters } from 'vuex'
 
 export default {
 	name: 'HomeMy',
@@ -22,20 +23,28 @@ export default {
 		MyToplist,
 		MySonglist
 	},
+	computed: {
+		...mapGetters([
+			'loginType'
+		])
+	},
 	mounted () {
-		apiMy.getUserlist({
-			uid: this.$store.state.uid
-		})
-		.then(res => {
-			// console.log(res.playlist)
-			this.songList = res.playlist
-		})
+		let bool = this.loginType
+		if (bool) {
+			apiMy.getUserlist({
+				uid: this.$store.state.uid
+			})
+			.then(res => {
+				// console.log(res.playlist)
+				this.songList = res.playlist
+			})
 
-		apiMy.getUserSubcount()
-		.then(res => {
-			// console.log(res)
-			this.userSubcount = res
-		})
+			apiMy.getUserSubcount()
+			.then(res => {
+				// console.log(res)
+				this.userSubcount = res
+			})
+		}
 	}
 }
 </script>
