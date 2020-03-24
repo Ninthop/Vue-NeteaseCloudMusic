@@ -4,15 +4,15 @@
 			<svg class="icon" aria-hidden="true">
 				<use xlink:href="#icon-yinzhi"></use>
 			</svg>
-			<div class="play-all" @click="playAllSong(playList.tracks)">
+			<div class="play-all" @click="playAllSong(playList)">
 				播放全部
-				<span class="song-num">(共{{ playList.trackCount }}首)</span>
+				<span class="song-num">(共{{ trackCount }}首)</span>
 			</div>
 		</div>
 
 		<!-- <div 
 			class="song" 
-			v-for="(item, index) of playList.tracks" 
+			v-for="(item, index) of playList" 
 			:key="index"
 		>
 			<song 
@@ -26,7 +26,7 @@
 		<virtual-list :size="40" :remain="20" class="songWrapper">
 			<div 
 				class="song" 
-				v-for="(item, index) of playList.tracks" 
+				v-for="(item, index) of playList" 
 				:key="index"
 			>
 				<song 
@@ -53,7 +53,8 @@ import virtualList from 'vue-virtual-scroll-list'
 export default {
 	name: 'SongContent',
 	props: {
-		playList: Object
+		playList: Array,
+		trackCount: Number
 	},
 	components: {
 		Song,

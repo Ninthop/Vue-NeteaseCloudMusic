@@ -18,7 +18,7 @@ export default {
 	name: 'app',
 	data () {
 		return {
-			unCache: ['user', 'Login', 'List'],
+			unCache: ['user', 'Login', 'List', 'Album','Singer','Comments'],
 		}
 	},
 	components: {

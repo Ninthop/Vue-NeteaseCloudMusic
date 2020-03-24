@@ -10,7 +10,7 @@
 - 发现页
 - 用户页，登录功能
 - 歌单页
-- 播放页，播放功能，迷你播放列表，最近播放
+- 播放页，播放功能，迷你播放列表，最近播放，收藏功能，评论（仅查看
 - 搜索页&搜索建议
 - 歌手页
 - 排行榜
@@ -22,11 +22,11 @@
 - Vuex
 - Stylus
 - element-ui
+- vue-infinite-scroll
 
 ## 问题
 - Vip和付费专辑判断逻辑有问题，待修复
 - 重复往歌单添加音乐，待修复
-- 音乐收藏和私人Fm还没做，待修复
 
 ## 目录
 
@@ -47,15 +47,15 @@
 │   ├── router                   // 路由
 │   ├── store                    // 状态管理
 │   ├── views
-│   |   ├── EverydayRec           //每日推荐
-│   |   ├── Home              　  //主页
-│   |   ├── Login                 // 登录页
-│   |   ├── NewSong　　　　　　　 　// 新歌速递
-│   |   ├── Player             　 // 播放器
-│   |   ├── RecentSong　　　　　　 // 最近播放
-│   |   ├── Search　　　　　　　 　// 搜索
-│   |   ├── Singer　　　　　　　 　// 歌手页
-│   |   ├── SongList              // 歌单页
+│   │   ├── EverydayRec           //每日推荐
+│   │   ├── Home              　  //主页
+│   │   ├── Login                 // 登录页
+│   │   ├── NewSong　　　　　　　 　// 新歌速递
+│   │   ├── Player             　 // 播放器
+│   │   ├── RecentSong　　　　　　 // 最近播放
+│   │   ├── Search　　　　　　　 　// 搜索
+│   │   ├── Singer　　　　　　　 　// 歌手页
+│   │   ├── SongList              // 歌单页
 │   │   ├── User               　 // 用户页
 │   ├── App.vue
 │   └── main.js
@@ -70,6 +70,9 @@
 - [better-scroll](https://github.com/ustbhuangyi/better-scroll)
 - [VueAwesomeSwiper](https://github.com/surmon-china/vue-awesome-swiper)
 - [lyric-parse](https://github.com/ustbhuangyi/lyric-parser)
+
+## 注意
+- 本地需自行下载接口服务（见下
 
 ## 接口服务
 [网易云音乐Api](https://binaryify.github.io/NeteaseCloudMusicApi)

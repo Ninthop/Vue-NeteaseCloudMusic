@@ -40,10 +40,19 @@ const getSingerSong = data => {
 	})
 }
 
+const getComment = data => {
+	return request({
+		url: '/comment/music',
+		method: 'get',
+		params: data
+	})
+}
+
 export {
 	getSong,
 	getLyric,
 	getSongDetail,
 	JuageCopyRight,
-	getSingerSong
+	getSingerSong,
+	getComment
 }

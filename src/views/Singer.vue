@@ -56,7 +56,7 @@ export default {
     destroyed () {
         window.removeEventListener('scroll', this.handleScroll)
 	},
-	activated() {
+	created() {
 		// console.log(this.$route.params.id)
 		getSingerSong({
 			id: this.$route.params.id

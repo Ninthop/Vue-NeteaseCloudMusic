@@ -23,8 +23,41 @@ const getUserSubcount = () => {
 	})
 }
 
+const getUserSubArtist = () => {
+	return request({
+		url: '/artist/sublist',
+		method: 'get'
+	})
+}
+
+const getUserSubMV = () => {
+	return request({
+		url: '/mv/sublist',
+		method: 'get'
+	})
+}
+
+const getUserSubAlbum = () => {
+	return request({
+		url: '/album/sublist',
+		method: 'get'
+	})
+}
+
+const getAblum = data => {
+	return request({
+		url: '/album',
+		method: 'get',
+		params: data
+	})
+}
+
 export {
 	getSonglist,
 	getUserlist,
-	getUserSubcount
+	getUserSubcount,
+	getUserSubArtist,
+	getUserSubMV,
+	getUserSubAlbum,
+	getAblum
 }

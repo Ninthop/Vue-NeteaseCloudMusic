@@ -1,5 +1,5 @@
 <template>
-	<div class="player" v-show="playlist.length > 0" @touchmove.prevent>
+	<div class="player" v-show="playlist.length > 0">
 		<transition name="fullScreen">
 			<div class="full-player" v-show="fullScreen">
 				<!-- 背景遮罩，模糊处理 -->
@@ -23,7 +23,7 @@
 							</span>
 						</div>
 					</span>
-					<router-link to="/comments" tag="span" class="share">
+					<router-link :to="'/comments/'+this.currentSong.id" tag="span" class="share" @click.native="routerBack">
 						<svg class="icon" aria-hidden="true">
 							<use xlink:href="#icon-pinglun-copy"></use>
 						</svg>
@@ -184,7 +184,8 @@ export default {
 			this.$store.commit('setShow', true)
 		},
 		openFullScreen () {
-			this.$store.commit('setFullScreen', true)
+			if (this.$router.app._route.name != 'comments')
+				this.$store.commit('setFullScreen', true)
 		},
 		// 切换播放状态
 		toggleStatus () {

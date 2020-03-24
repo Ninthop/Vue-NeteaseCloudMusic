@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<list-header :playList="playList" />
-		<song-content :playList="playList" @playAll="playAll"/>
+		<song-content :playList="tracks" @playAll="playAll" :trackCount="trackCount"/>
 	</div>
 </template>
 
@@ -14,7 +14,9 @@ export default {
 	name: 'List',
 	data () {
 		return {
-			playList: {}
+			playList: {},
+			tracks: [],
+			trackCount: 0
 		}
 	},
 	components: {
@@ -33,11 +35,14 @@ export default {
 		// console.log(this.$route.params.id)
 		this.$store.commit('toggleLoad', 0)
 		getSonglist({
-			id: this.$route.params.id
+			id: this.$route.params.id,
+			timestamp: (new Date()).getTime()
 		})
 		.then(res => {
 			// console.log(res)
 			this.playList = res.playlist
+			this.tracks = res.playlist.tracks
+			this.trackCount = res.playlist.tracks.length
 		})
 		// console.log(this.$store.state.fullScreen)
 	}

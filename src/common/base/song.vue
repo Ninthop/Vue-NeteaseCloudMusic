@@ -15,9 +15,12 @@
 				</span>
 				<span class="separator">-</span>
 				<span class="cover">{{ album.name }}</span>
-				<span class="vip" v-if="songDetial.fee == 1 || songDetial.fee == 16">Vip</span>
-				<span class="vip" v-if="songDetial.fee == 4">需购专辑</span>
 			</span>
+		</div>
+		<!-- vip和购买专辑的特殊要求 -->
+		<div class="vipAndAlbum">
+			<span class="vip" v-if="songDetial.fee == 1 || songDetial.fee == 16">VIP</span>
+			<span class="vip" v-if="songDetial.fee == 4">需购专辑</span>
 		</div>
 	</div>
 </template>
@@ -87,8 +90,9 @@ export default {
 	.singleSong
 		display flex
 		width 100%
+		// border 1px solid red
 		.index
-			height 3rem
+			// height 3rem
 			width 3rem
 			display flex
 			justify-content center
@@ -117,16 +121,11 @@ export default {
 				font-size $font-size-small
 				&.NoCopyRight
 					color lightgray
-				.vip
-					color red
-					margin-left 1rem
-					border .1rem solid red
-					padding .1rem .2rem
-					border-radius .3rem
 				span.ar
 					&:after
 						content '/'
 						margin-right .3rem
+						color black
 					&:nth-last-child(3)
 						&:after
 							content ''
@@ -134,4 +133,18 @@ export default {
 					ellipsis-one()
 				.separator
 					padding 0 .2rem
+		.vipAndAlbum
+			display flex
+			flex-direction column
+			flex 1
+			justify-content center
+			align-items  flex-end
+			margin-right 1.5rem
+			.vip
+				color red
+				margin-left 1rem
+				border .1rem solid red
+				padding .1rem .2rem
+				border-radius .3rem
+				margin-bottom .2rem
 </style>

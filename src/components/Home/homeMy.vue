@@ -28,28 +28,34 @@ export default {
 			'loginType'
 		])
 	},
-	mounted () {
-		let bool = this.loginType
-		if (bool) {
-			apiMy.getUserlist({
-				uid: this.$store.state.uid
-			})
-			.then(res => {
-				// console.log(res.playlist)
-				this.songList = res.playlist
-			})
+	methods: {
+		myApi() {
+			let bool = this.loginType
+			if (bool) {
+				apiMy.getUserlist({
+					uid: this.$store.state.uid,
+					timestamp: (new Date()).getTime()
+				})
+				.then(res => {
+					// console.log(res.playlist)
+					this.songList = res.playlist
+				})
 
-			apiMy.getUserSubcount()
-			.then(res => {
-				// console.log(res)
-				this.userSubcount = res
-			})
+				apiMy.getUserSubcount()
+				.then(res => {
+					// console.log(res)
+					this.userSubcount = res
+				})
+			}
 		}
+	},
+	mounted () {
+		this.myApi();
 	}
 }
 </script>
 
 <style lang="stylus" scoped>
 	.home-my
-		background-color #f5f5f5
+		background #f5f5f5
 </style>

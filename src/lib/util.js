@@ -35,8 +35,13 @@ const shuffle = arr => {
 	return arr
 }
 
+const sleep = time => {
+	return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 export {
-    startLoading,
+	startLoading,
 	endLoading,
-	shuffle
+	shuffle,
+	sleep
 }

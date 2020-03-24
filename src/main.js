@@ -4,19 +4,24 @@ import router from './router/'
 import store from './store/'
 import fastClick from 'fastclick'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import { Loading, Tabs } from 'element-ui'
+import { Loading, Tabs, TabPane } from 'element-ui'
 import './assets/style/reset.css'
 import './assets/style/border.css'
 import './assets/style/iconfont.css'
 import './assets/style/varibles.styl'
 import './assets/style/mixin.styl'
 import 'swiper/dist/css/swiper.css'
+import axios from 'axios'
+import infiniteScroll from "vue-infinite-scroll"
 
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 Vue.use(Loading)
 Vue.use(Tabs)
-
+Vue.use(TabPane)
+Vue.prototype.$axios = axios;
+Vue.use(infiniteScroll)
+axios.defaults.withCredentials = true;
 
 new Vue({
   router,
