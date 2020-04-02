@@ -98,7 +98,7 @@ export default {
 				@media all and (max-width 768px)
 					width 29%
 				img
-					min-height 9rem
+					min-height 10.8rem
 					background-color lightgray
 					width 100%
 					border-radius .4rem

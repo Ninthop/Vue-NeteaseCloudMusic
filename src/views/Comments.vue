@@ -44,7 +44,7 @@
 								<div>回复：</div><span>{{ newComment.beReplied[0].content }}</span>
 							</div>
 						</div>
-						<div class="comment-likeCount">❤{{newComment.likedCount}}</div>
+						<div class="comment-likeCount">❤ {{newComment.likedCount}}</div>
 					</div>
 				</div>
 			</el-tab-pane>
@@ -205,6 +205,7 @@ export default {
 					position absolute
 					right 5%
 					color rgb(100,100,100)
+					font-size $font-size-normal
 			.comment:last-child
 				.comment-infos
 					border 0

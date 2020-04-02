@@ -140,6 +140,7 @@ export default {
 			justify-content center
 			align-items  flex-end
 			margin-right 1.5rem
+			font-size $font-size-normal
 			.vip
 				color red
 				margin-left 1rem
