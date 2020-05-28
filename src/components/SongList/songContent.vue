@@ -23,7 +23,7 @@
 				:album="item.al" />
 		</div> -->
 
-		<virtual-list :size="40" :remain="20" class="songWrapper">
+		<virtual-list :size="60" :remain="10" class="songWrapper">
 			<div 
 				class="song" 
 				v-for="(item, index) of playList" 

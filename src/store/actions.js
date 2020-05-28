@@ -1,7 +1,7 @@
 import { getUserInfo } from '@/api/User/user.js'
 import { getSongDetail } from '@/api/Song/song.js'
 import { getAlbumSong } from '@/api/Home/find.js'
-import { getHotSearchS, getSearchResult } from '@/api/Search/search'
+import { getHotSearchS } from '@/api/Search/search'
 import { getEverydaySong } from '@/api/Home/find.js'
 import { playMode } from '_com/config/playMode'
 import axios from 'axios'
@@ -99,17 +99,6 @@ const actions = {
 		commit('setMode', playMode.sequence)
 		// commit('addRecentPlay', allSong[0])
 		// console.log(999)
-	},
-
-	getSearchResultType ({commit, rootState}) {
-		getSearchResult({
-			keywords: rootState.keyWords,
-			type: rootState.searchType
-		})
-		.then(res => {
-			commit('setSearchResult',res.result)
-			// console.log(res.result)
-		})
 	},
 
 	playSingleMusic({commit,rootState}, song) {

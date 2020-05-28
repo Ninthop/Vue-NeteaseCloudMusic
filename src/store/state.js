@@ -22,9 +22,7 @@ const state = {
 	searchAdvice: {},
 	hotSearch: {},
 	searchResult: {},
-	searchType: 1,
 	resultShow: false,
-	keyWords: '',
 
 	//主页按钮
 	everydaySong: [],

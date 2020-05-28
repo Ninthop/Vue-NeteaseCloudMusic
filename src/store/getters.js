@@ -15,8 +15,6 @@ const getters = {
 	hotSearch: state => state.hotSearch,
 	searchResult: state => state.searchResult,
 	resultShow: state => state.resultShow,
-	searchType: state => state.searchType,
-	keyWords: state => state.keyWords,
 	everydaySong: state => state.everydaySong,
 	currentSong: (state) => {
 		return state.playlist[state.currentIndex] || {}

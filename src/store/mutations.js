@@ -63,12 +63,6 @@ const mutations = {
 	setResultShow(state, bool) {
 		state.resultShow = bool
 	},
-	setSearchType(state, type) {
-		state.searchType = type
-	},
-	setKeyWords(state, keyWords) {
-		state.keyWords = keyWords
-	},
 	addRecentPlay(state, song) {
 		state.recentPlay.unshift(song)
 		// console.log(state.recentPlay)

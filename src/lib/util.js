@@ -21,7 +21,7 @@ const endLoading = () => {
 	}
 }
 
-function Random (min, max) {
+function Random(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
@@ -35,6 +35,19 @@ const shuffle = arr => {
 	return arr
 }
 
+const throttle = function(func, delay) {
+	var prev = Date.now();
+	return function() {
+			var context = this;
+			var args = arguments;
+			var now = Date.now();
+			if (now - prev >= delay) {
+					func.apply(context, args);
+					prev = Date.now();
+			}
+	}
+}
+
 const sleep = time => {
 	return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -43,5 +56,6 @@ export {
 	startLoading,
 	endLoading,
 	shuffle,
-	sleep
+	sleep,
+	throttle
 }
