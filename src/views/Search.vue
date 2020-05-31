@@ -53,7 +53,7 @@ import { mapGetters } from "vuex";
 import RecSearch from "../components/Search/recSearch";
 import SearchResult from "../components/Search/searchResult";
 import { getSearchResult } from "@/api/Search/search";
-import { throttle } from '../lib/util'
+import { throttle, endLoading } from '../lib/util'
 
 export default {
   name: "Search",
@@ -120,7 +120,10 @@ export default {
   },
   computed: {
     ...mapGetters(["searchAdvice", "resultShow"])
-  },
+	},
+	created() {
+		endLoading()
+	},
   watch: {
     keyWords(newWords) {
       if (newWords) {
